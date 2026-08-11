@@ -59,7 +59,12 @@
 
 %-------------------- Bibliography
 
-\usepackage[backend=biber,articletitle=true,style=chem-rsc,doi=false]{biblatex}
+\usepackage[sortcites,
+            backend=biber,
+            style=numeric-comp,
+            url=false,
+            eprint=false,
+            sorting=none]{biblatex}
 
 
 %-------------------- Hyperlinks in your document.
@@ -74,3 +79,11 @@
 \renewcommand{\thefootnote}{\arabic{footnote}}
 
 %-------------------- Add your own packages here
+
+\usepackage[explicit,compact]{titlesec}
+\usepackage{amsmath}
+
+\usepackage{siunitx}
+\sisetup{range-units=single}
+
+\usepackage[capitalize, noabbrev]{cleveref}
