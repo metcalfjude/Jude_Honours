@@ -1,0 +1,47 @@
+\section{Dynamical-Information adaptation}\label{sec:dynamical-information_adaptation}
+The most important component of the dynamics here studied is the dynamical-informative kernel. This component is the most important extension of the work done on fractional neural sampling in works such as \textcite{chen_spatiotemporal_2022} to a full computational model of visual searching during active vision. We call the kernel dynamical-informative, as the kernel influences the model through two coupled processes: the dynamics of the FNS sampler during exploration of a landscape, which is informed by; the information gained during such exploration when considered as an active search. As such, the development of kernel dynamics is informed by previous work in statistical physics and abstract computational sampling, as well as work done informational gathering in the modelled system of visual acuity during search tasks. Importantly, a similar computational process of kernel deposition is called metadynamics in Bayesian probability landscape exploration, see \textcite{barducci_well-tempered_2008} for the introduction of metadynamics and \textcite{bussi_using_2020} for its developed use as ``well-tempered metadynamics'' in balancing sampled accuracy and ergodicity. We shall see that these kernel dynamics encode the theta-rhythmic scale of saccades explored in \cref{sec:theta_rhythmicity_of_saccades} as well as the rate of information gain explored throughout \cref{chap:functional_advantages} when considering functional roles of model dynamics in search tasks abstractly.
+
+% We introduce a process by which the FNS walker will dynamically adapt to the explored target landscape. Dynamic adaptation is the most important addition of the original work on the FNS framework; both the circuit model in \textcite{qi_fractional_2022} and its application to visual processing in \textcite{chen_spatiotemporal_2022}.
+\subsection{Motivations for the introduction of kernel adaptation}\label{subsec:motivations}
+The motivations for an addition of a dynamic landscape adaptation of the model are threefold. Firstly, the quantity of information gathered by the gaze trajectory must be accounted for. Secondly, the empirical regularity of saccades during visual search must be encoded, most importantly the recently discovered phenomena of strongly theta-rhythmic saccades explored further in \cref{sec:theta_rhythmicity_of_saccades}, as well as the  the well-studied phenomenon of inhibition of return (IoR) \cite{ludwig_mechanism_2009, redden_inhibition_2021}. Thirdly, we functionally informative description of search dynamics must couple these search dynamics to the current information which has been gathered complete the feedback loop of active vision \cite{Renninger2005-ee, Bruce_2009_Saliency, mcdonnell_introductory_2011, kittler_effective_2026}. In constructing our model, following the sampling framework outlined in \cref{subsec:neur_sampling} our model encodes information through an effective potential landscape which is explicitly related to the probability density of the landscape:
+\begin{equation}
+    V_{\text{eff}}(\textbf{x}) = -\ln \pi(\textbf{x})
+\end{equation}
+where a dynamical drift term to recover the distribution $\pi(\textbf{x})$ is calculated by analogy to gradient descent as $b(\textbf{x}) \approx c_{\alpha} \nabla V_{\text{eff}}(\textbf{x})$ as in \cref{eq:fns}. With no prior knowledge of the landscape, this is effectively a ``saliency map'' when interpreted in the context of visual sampling. However, to encode the information learned, we recognise that the effective potential will have a dynamical form:
+\begin{equation}
+    V_{\text{eff}}(\textbf{x},t) = -\ln \pi_{\text{post}}(\textbf{x},t)
+\end{equation}
+where $\pi_{\text{post}}(\textbf{x},t)$ is the posterior target distribution, and in the context of a search task this encodes the posterior belief in the location of a searched-for target. To define dynamics, we must motivate and present an update rule to define $V_{\text{eff}}(\textbf{x},t)$.
+
+To couple gaze dynamics to information gained continuously from a prior saliency map $\pi(\textbf{x})$, we examine the structure of visual information gathering. In this work the target distribution will encode the belief in the presence of one of a set of target objects, in a Bayesian sense. Thus, exploration of non-target locations will cause a depletion of probability mass from the target distribution $\pi$ locally. This is equivalent in the dynamical model to increasing the potential landscape locally by some kernel function whose size represents the spatial scale of information gathering. Thus, since information is theoretically connected to the logarithm of a probability density function, we have an instantaneous dynamical law of kernel dynamics as the gaze is positioned at $\textbf{x}_0$:
+\begin{equation}
+    \partial_t V_{\text{eff}}(\textbf{x}) = \frac{1}{\tau}k(\textbf{x} - \textbf{x}_0)
+\end{equation}
+where $k(\cdot)$ is assumed to be some approximately radially symmetric kernel function which limits to zero for large $\textbf{x}$, and is chosen to have scaling $k(\textbf{0})=1$. $k(\cdot)$ will then have a width which correlates directly to the spatial scale of information gathering, which for the human eye is explored here in \cref{subsec:spatial_scaling}. Throughout this work, we use an isotropic Gaussian function for $k(\cdot)$, with
+\begin{equation}
+    k(\textbf{x}) = \exp \left( - \frac{\| \textbf{x} \|^2 }{2 \sigma_k^2} \right)
+\end{equation}
+\subsection{Adaptive kernel dynamics as a driver of slow rhythmic exploration}\label{subsec:adaptive_kernel_dynamics}
+We can analytically predict the rate of excursions of an FNS-walker to other modes of the target distribution $\pi(\textbf{x})$. We consider excursions purely caused by the dynamically adaptive potential kernel controlled by the parameter $\tau$ which takes the analogy to the rate of information acquisition defined by some bell-shaped kernel $k(\textbf{x})$. Based purely on the value of $\tau$, and the approximate shape of $k(\textbf{x})$ we can construct a tractable transition condition as follows: The effective potential well in log-probability space becomes concave-down. Such a condition will no longer permit localisation of the FNS walker, and Lévy-driven noise will create excursions to other modes.\\
+
+We analyse this condition by considering a single isotropic radial Gaussian target distribution centred at zero with standard deviation $\sigma_{\text{fix}}$. We simplify this problem to simply predict the average interval between excursions within a very localised potential, with excursions largely driven by deterministic kernel dynamics. It is a well known fact that Lévy noise will also introduce Poisson-distributed waiting times between frequent excursions, however analysis of this is beyond the scope of this project. This corresponds to a quadratic potential well in log-probability space. This choice is maximally general, as all local modes will be approximated to second order by a quadratic potential well, using Laplace's approximation. We also consider an adaptive kernel $k(\textbf{x})$ which is a radial Gaussian in log-probability space with a standard deviation $\sigma_{k}$. For similar reasons as the choice of potential well, such a choice yields the same results for different choices of $k(\textbf{x})$ which have the same radial curvature. Thus, using a radial coordinate $r$ which is centred at the mode $r=0$, assuming that $\sigma_{k} \gg \sigma_{\text{fix}}$ and that the walker is localised at $r \approx 0$, our effective potential function $S(r;t)$ will evolve as
+\begin{align}
+    \frac{\partial S(r;t)}{\partial t} &= \frac{1}{\tau} k(\textbf{x}) = \frac{1}{\tau} \exp \left( -\frac{r^2}{2 \sigma_{k}^2}\right), \\
+    S(r;0) &= -\ln \pi(\textbf{x}) = \frac{r^2}{2 \sigma_{\text{fix}}^2}
+\end{align}
+after integrating, this yields the form effective potential after time $t$
+\begin{equation}
+    S(r; t) = \frac{r^2}{2 \sigma_{\text{fix}}^2} + \frac{t}{\tau} \exp \left\{ -\frac{r^2}{2 \sigma_{k}^2}\right\}
+\end{equation}
+Then, our excursion criterion is that at time $t_{\theta}$ at the fixation $\|x\|=0$, the radial second derivative will become negative, leaving the walker unconstrained. The second radial derivative is here
+\[
+ \frac{\partial^2 S(r;t)}{\partial r^2} = \frac{1}{\sigma_{\text{fix}}^2} + \frac{t}{\tau}\left[ \frac{r^2}{\sigma_k^4} - \frac{1}{\sigma_k^2} \exp \left\{ -\frac{r^2}{2 \sigma_{k}^2}\right\}\right]
+\]
+and we find where this second derivative is zero at the fixation point $r=0$ to find the timescale $t_{\theta}$
+\[
+ \frac{1}{\sigma_{\text{fix}}^2} + \frac{t_{\theta}}{\tau}\left[ 0 - \frac{1}{\sigma_k^2}  \right] = 0
+\]
+\begin{equation}\label{eq:theta_rhythm}
+    t_{\theta} = \tau \frac{\sigma_{k}^2}{\sigma_{\text{fix}}^2}
+\end{equation}
+It is unsurprising that $t_{\theta}$ is proportional to $\tau$. The fact that $t_{\theta}$ is proportional to the squared ratio of the width of the adaptive kernel $\sigma_k$ and the width of the mode $\sigma_{\text{fix}}$ is of interest. This result shows that the average amount of time dwelt within a potential well will be inversely proportional to the square of the largest variance.

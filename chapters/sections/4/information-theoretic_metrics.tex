@@ -1,0 +1,52 @@
+\section{Information-theoretic metrics}\label{sec:information-theoretic_metrics}
+When considering the efficiency advantages of strategic sampling in a visual search task, the central quantity under study is the information gain, $IG(t)$. To quantify informational search efficiency across a full abstract search landscape, we take inspiration from Bayesian inference and sampling methods. In particular, the adaptive dynamics of our sampling model closely resemble well-tempered metadynamics in Markov chain Monte Carlo (MCMC) sampling \cite{tiwary_time-independent_2015}. Simultaneously, similar techniques have been applied to model visual search in discrete time by tracking the information gathered strictly at a target goal position \cite{bujia_modeling_2022}. In \cref{sec:dynamical-information_adaptation} we have expanded and unified these approaches by analysing a continuous-time behavioural dynamical-information kernel. By tracking and integrating real-time kernel deposition at every location in the informative landscape, we model global information acquisition across an evolving landscape of belief. 
+
+\subsubsection*{Quantifying kernel-driven dynamical information}
+To encode this potential function adaptation, we take inspiration from Bayesian inference and sampling methods. In particular, the dynamics are very similar to the foundational technique of well-tempered metadynamics in MCMC sampling \cite{tiwary_time-independent_2015}. The application of such a technique to modelling studies of a visual search has been described in discrete time by \textcite{bujia_modeling_2022}, where the equivalent target distribution is the likelihood distribution for some search goal. In this work, the information is only tracked at the goal position, by tracking the likelihood value at this point. However, we expand on this work by analysing the information kernel in our continuous-time model, and tracking the posterior target distribution after kernel deposition at every location in the visual scene, thus tracking global information acquisition. 
+
+We quantify this information across the entire target landscape gained through this adaptive kernel. In particular, given the theoretical paradigm of a search through a probabilistic landscape for high probability modes, information extracted is proportional to the change in entropy of the target distribution. Since we study an update to an effective belief distribution (where target likelihood is the likelihood of locating a goal), we directly use the language and tools of Bayesian inference. Examining the cross-entropy of the landscape at some time $t$ (the posterior distribution $\pi_t(\textbf{x})$) to the original pre-search landscape (the prior distribution $\pi_0(\textbf{x})$) is the natural first step in comparing information gathering through time.
+
+Considering the initial pre-search belief distribution, $\pi_0(\textbf{x})$, we examine the information gained in kernel updates to $\pi_t(\textbf{x})$. $\pi_0(\textbf{x})$ can be defined through $V_0(\textbf{x})$, which functions as the saliency-potential landscape, through Boltzmann-Gibbs statistics
+\begin{equation}
+    \pi_0(\textbf{x}) = \frac{\exp\{-V_0(\textbf{x})\}}{\int_{\textbf{x}'} \exp\{-V_0(\textbf{x}')\} \, d\textbf{x}'}
+\end{equation}
+As the visual search progresses, the initial effective potential $V_0(\textbf{x})$ updates in continuous time to encode learned information. This adaptation takes the form of an accumulated kernel over time $t$:
+\begin{equation}
+    V_t(\textbf{x}) = V_0(\textbf{x}) + \int_0^t k(\textbf{x}_{t'}) \, \frac{dt'}{\tau}
+\end{equation}
+This adapted potential defines the posterior belief distribution, representing the updated target likelihood landscape at time $t$
+\begin{equation}
+    \pi_t(\textbf{x}) = \frac{\exp\{-V_t(\textbf{x})\}}{\int_{\textbf{x}'} \exp\{-V_t(\textbf{x}')\} \, d\textbf{x}'}
+\end{equation}
+Because these dynamics study updates to an belief distribution—where likelihood reflects the probability of locating a goal—we directly utilise the analytical framework of Bayesian inference to measure efficiency. Given the search through a probabilistic landscape for high-probability modes, the information extracted is proportional to the change in the distribution's entropy. A natural first step in evaluating information gathering over time is to compute the cross-entropy between the posterior distribution $\pi_t(\textbf{x})$ and the prior distribution $\pi_0(\textbf{x})$:
+\begin{equation}
+    H(\pi_t, \pi_0) = -\int \pi_t(\textbf{x}) \log \pi_0(\textbf{x}) \, d\textbf{x}
+\end{equation}
+However, it has been found that cross-entropy alone is of limited utility, as it conflates the internal concentration of belief within the posterior (represented by its self-entropy, $H(\pi_t)$) with the net information gained relative to the prior. To decouple these two contributions, we subtract the posterior entropy term to obtain the Kullback-Leibler (KL) divergence, $D_{\text{KL}}(\pi_t \parallel \pi_0)$. This yields the formal definition of information gain up to time $t$:
+\begin{align}
+    IG(t) &= H(\pi_t, \pi_0) - H(\pi_t) \nonumber \\
+          &= -\int \pi_t(\textbf{x}) \log \pi_0(\textbf{x}) \, d\textbf{x} + \int \pi_t(\textbf{x}) \log \pi_t(\textbf{x}) \, d\textbf{x} \nonumber \\
+          &= \int \pi_t(\textbf{x}) \log \left( \frac{\pi_t(\textbf{x})}{\pi_0(\textbf{x})} \right) d\textbf{x} \nonumber \\
+          &\equiv D_{\text{KL}}(\pi_t \parallel \pi_0) \label{eq:information_gain}
+\end{align}
+Two fundamental properties of the KL divergence are that it is non-negative and asymmetric. In the context of an abstract sampling model, the non-negativity represents the fact that any spatial update from $\pi_0$ represents accumulated evidence, though not necessarily optimal search efficiency. A weak kernel, slow informative timescale $\tau$, or deposition in low-likelihood areas alters the landscape only marginally and results in slower growth in $IG$. The information content of the search trajectory is therefore entirely captured by $IG$, quantifying the global information acquired as the observer's belief landscape evolves from $\pi_0$ to $\pi_t$.
+\subsubsection*{Information velocity}
+A direct quantity derived from the definition of information gain is information velocity $IV$. The information velocity is defined directly as the first derivative of $IG$. Comparing the averaged value of the information velocity given the same informative timescale $\tau$ measures how different strategies serve to quantify the quality of information gathered. A strategy targeting high likelihood areas, and driving transitions which are sensitive to the decrease in level of likelihood will have high average $IV_{\text{mean}}$ and $IV_{\text{med}}$ values.
+\subsubsection*{First passage time}
+Perhaps the clearest metric of search efficiency is the speed of completing a task. In our system, this is calculated directly as the duration of each trial, called first passage time (FPT). We can derive an expected first passage time based on the theta-scale rate of saccades as calculated in \cref{eq:theta_rhythm} under \cref{sec:dynamical-information_adaptation} and the amount of target points in the visual scene compared to the total. Using a number of targets $K$, and a total number of points $N$, the probability of reaching no targets after $n$ saccades is given by the hypergeometric distribution evaluated at zero:
+\begin{equation} \label{eq:hypergeo}
+    p_n(0) = \frac{\binom{K}{0}\binom{N-K}{n}}{\binom{N}{n}} = \frac{(N-K)!(N-n)!}{(N-K-n)!N!}
+\end{equation}
+To find the expected number of saccades $\mathbb{E}[n]$, we calculate for which $n$ \cref{eq:hypergeo} gives $p_n(0)<0.5$. The expected first passage time is then $\mathbb{E}[\text{FPT}] = t_{\theta} \mathbb{E}[n]$. for our standard set of parameters and experiment as defined in \cref{chap:model_fitting}, we can see that this gives an expected first passage time
+\begin{align}
+    \mathbb{E}[\text{FPT}] &= t_{\theta} \times \mathbb{E}_{N=256,K=5}[n] \nonumber \\
+    &= 0.1422 \times 94 \nonumber \\
+    &= 13.36 \ \text{secs}\label{eq:fpt_expected}
+\end{align}
+This calculation assumes that each transition is independent and drawn from a stationary distribution with mean $t_{\theta}$ across the search task. These assumptions expect the true dynamics of the system to yield an averaged FPT value which is dependant on the system parameters. For instance, a superdiffusive walker will have access to the entire scene and may explore nearby fixation points, and then migrate to far-displaced areas of the scene. Another consideration is the strength of the memory-momentum term $\beta$, linked to the gamma-scale fixational tremor of physiological eye tracking data. This activity may allow more responsive reaction to changes in the saliency landscape as information is received from the scene.
+\subsubsection*{Shape parameter}
+While the preceding metrics depend explicitly on the search timescale, we can evaluate the fundamental efficiency of a sampling process by making it dimensionless. By normalising each search trial so that both time and information content range from 0 to 1, we can examine the averaged shape of the monotonic accumulation curve $IG(t)$ independent of absolute time. Statistically, we can calculate an averaged value for this by considering the area under the curve of information gain, and transforming to examine an effective power law fit of information gain.
+\subsubsection*{Gini coefficient}
+For a gini coefficient, we examine the inequality in the information gained over smalled binned time periods, larger than the gamma oscillation
+\subsubsection*{Information-entropy gradient}
+Here, we attempt to measure the gradient of information to changes in posterior certainty. That is, the efficiency a change in belief has in gaining information

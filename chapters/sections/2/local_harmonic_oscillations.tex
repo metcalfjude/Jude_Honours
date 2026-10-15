@@ -1,0 +1,34 @@
+\section{Local harmonic oscillations}\label{sec:local_harmonic_oscillations}
+One predictive feature of FNS dynamics is that they produce resonant oscillations in confined potentials. We can find the spectral peak during fixational dynamics under FNS dynamics by considering the deterministic dynamics under the FNS equations of motion in \cref{eq:fns}. Considering a Gaussian probability distribution of fixation positions $\pi(\textbf{x}) \propto \exp \left\{ - \frac{\| \textbf{x} \|^2}{2 \sigma_{\text{fix}}^2} \right\}$ and thus logarithmic gradients $\nabla \ln \pi(\textbf{x}) = -\frac{\textbf{x}}{\sigma_{\text{fix}}^2}$. Using this as our saliency landscape, our equations of motion as in \ref{eq:fns}
+\begin{equation}
+\begin{aligned}
+    d\textbf{x}_t &= -\gamma c_{\alpha} \frac{\textbf{x}_t}{\sigma_{\text{fix}}^2} dt + \beta \textbf{p}_t dt + \gamma^{1/\alpha} dL_t^{\alpha}, \\
+    d\textbf{p}_t &= -\beta c_{\alpha} \frac{\textbf{x}_t}{\sigma_{\text{fix}}^2} dt
+\end{aligned}
+\end{equation}
+where we ignore the stochastic noise driving this equation to only consider the coupled ODE which describes deterministic part of $\textbf{x} = \textbf{x}_t$ and $ \textbf{p} = \textbf{p}_t$, where the loss of subscript in typical when moving from an SDE to an ODE
+\begin{equation}
+\begin{aligned}
+    \frac{d \textbf{x}}{dt} &= -\gamma c_{\alpha} \frac{\textbf{x}}{\sigma_{\text{fix}}^2} + \beta \textbf{p}, \\
+    \frac{d\textbf{p}}{dt} &= -\beta c_{\alpha} \frac{\textbf{x}}{\sigma_{\text{fix}}^2} 
+\end{aligned}
+\end{equation}
+where the ODE describing $\textbf{x}$ can be differentiated, and $\frac{d\textbf{p}}{dt}$ substituted to give one second order ODE for $\textbf{x}$
+\begin{equation}
+    \frac{d^2 \textbf{x}}{dt^2} = -\frac{\gamma c_{\alpha}}{\sigma_{\text{fix}}^2} \frac{d\textbf{x}}{dt} - \frac{\beta^2 c_{\alpha}}{\sigma_{\text{fix}}^2} \textbf{x}
+\end{equation}
+Solving the characteristic equation associated with this ODE, $\lambda^2 + \frac{\gamma c_{\alpha}}{\sigma_{\text{fix}}^2} \lambda + \frac{\beta^2 c_{\alpha}}{\sigma_{\text{fix}}^2} = 0$, we have
+\begin{equation}
+    \lambda = \frac{1}{2}\left( 
+    -\frac{\gamma c_{\alpha}}{\sigma_{\text{fix}}^2} 
+    \pm \sqrt{\frac{\gamma^2 c_{\alpha}^2}{\sigma_{\text{fix}}^4} - 4\frac{\beta^2 c_{\alpha}}{\sigma_{\text{fix}}^2}} \right)
+\end{equation}
+Assuming an underdamped regime where the discriminant is negative, the resonant frequency $\omega$ of the fixational dynamics corresponds to the' imaginary part of the eigenvalues
+\begin{equation}\label{eq:resonant_frequency}
+    \omega = \sqrt{\frac{\beta^2 c_{\alpha}}{\sigma_{\text{fix}}^2} - \frac{\gamma^2 c_{\alpha}^2}{4\sigma_{\text{fix}}^4}}
+\end{equation}
+which yields ordinary frequency
+\begin{equation}
+    f = \frac{1}{2 \pi \sigma_{\text{fix}}} \sqrt{\beta^2 c_{\alpha} - \frac{\gamma^2 c_{\alpha}^2}{4\sigma_{\text{fix}}^2}}
+\end{equation}
+% The parameters $\beta$ and $\gamma$ drive the high-frequency dynamics observed during fixation intervals. $\beta = 1000$ was explicitly tuned to match the empirical microtremor fixation frequency at 65 Hz with a standard deviation of 3 pixels. Correspondingly, $\gamma = 1000$ was selected to be of a similar order of magnitude to $\beta$ to appropriately dampen these strong 65 Hz oscillations. The interaction of these parameters successfully replicates a prominent gamma-band peak centred around 65 Hz, matching empirical eye velocity power spectral density during stable fixations.

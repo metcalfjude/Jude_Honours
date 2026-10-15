@@ -1,0 +1,58 @@
+\section{Lévy superdiffusion}\label{sec:levy_superdiffusion}
+The equations of motion for our system are derived from the over-damped Langevin regime, driven by Lévy noise. Such underlying dynamics are known as Lévy flight (see \ref{subsec:levy_motion}) and are the paradigm superdiffusive system. However, both the adaptive kernel dynamics, and auxiliary momentum dynamics add complexity to the superdiffusive properties of the model. Quantifying superdiffusion in this system exploring a confined and dynamic potential landscape introduces two distinct and challenging problems: firstly, a kind of inter-modal superdiffusion is introduced through adaptive kernel dynamics which expel the walker from potential wells, and secondly a superdiffusion on small spatiotemporal scales results from near-ballistic momentum-driven harmonic oscillations.
+
+\subsubsection*{Analysis of Lévy flight superdiffusion from the fractional Fokker-Planck equation}
+Lévy processes are the canonical form of superdiffusion, yet the analysis of the precise form of statistical diffusion scaling requires close analysis. Lévy flight superdiffusion is analysed from the deterministic dynamics of the probability distribution of jump size $P(\| \Delta x \|)$ dynamics of the probability distribution. This is because the dynamics of the probability distribution is governed by the fractional Fokker Planck equation as in \cite{barkai_fractional_2001, boffi_probability_2023, qi_fractional_2022}. Considering the phase space of our coupled differential equations as $\textbf{z} = [\textbf{x}, \textbf{y}]$, the fractional Fokker-Planck equation can be analysed:
+\begin{equation}\label{eq:fractional_fokker_planck}
+    \frac{\partial P(\textbf{z}, t)}{\partial t} = - (\textbf{D} + \textbf{Q})\frac{\partial}{\partial \textbf{z}} \left[ b(\textbf{z}) P(\textbf{z}, t)\right] - \textbf{D} \mathcal{D}_{\textbf{z}}^{\alpha} P(\textbf{z}, t)
+\end{equation}
+Where $\mathcal{D}^{\alpha}_{\textbf{z}}$ represents the $\alpha$-fractional Riesz derivative, which generalises the operation of the Laplacian to fractional orders, and is defined in Fourier space as $\mathcal{D}^{\alpha}_{\textbf{z}}[f] = \mathcal{F}^{-1} \|\textbf{k}\|^{\alpha} \mathcal{F}[f]$, with the case of $\alpha = 2$ restoring the ordinary Fokker-Planck equation with $\mathcal{D}^{\alpha = 2}_{\textbf{z}} = -\nabla_{\textbf{z}}^2$. The $b(\textbf{z})$ drift term is presented in \cref{eq:full_drift}, and it's local approximation used throughout this thesis in \cref{eq:drift_approx}. The matrices in \cref{eq:fractional_fokker_planck} encode the form of the FNS dynamics given in \cref{eq:fns}, where 
+$\mathbf{D} = \begin{bmatrix}
+\gamma & 0\\
+0 & 0
+\end{bmatrix}$ 
+and $\mathbf{Q} = \begin{bmatrix}
+0 & -\beta\\
+\beta & 0
+\end{bmatrix}$ 
+are the generalised matrices defining Langevin dynamical systems. $\mathbf{D}$ is the positive semi-definite matrix which defines the diffusion strength, while $\mathbf{Q}$ is the skew-symmetric matrix which defines the coupling between dynamical variables. Solutions of the dynamics in \cref{eq:fractional_fokker_planck} are nontrivial, as the fractional derivative results in a nonlinear multivariate integro-differential equation which is difficult to propagate, even numerically. This further motivates our method of analysing individual numerically integrated trajectories of \cref{eq:fns}. When considering diffusion over short timescales, the physics of Langevin systems are largely noise dominated. In our Lévy driven system, short times are dominated by $\alpha$-stable $dL^{\alpha}_t$ Lévy noise, across power-law distributed spatial scales of short jumps and nonlocal jumps to distant positions in short times. This is corroborated by the scaling of Lévy noise as $dL^{\alpha}_{\Delta t} = \Delta t^{1/\alpha} dL^{\alpha}_1$ in \cref{eq:levy_noise} is stronger than ballistic effects which scale in short times as $\Delta t$. Thus, considering the fractional Fokker-Planck equation evolving from a delta function initial condition $P(\textbf{z},0) = \delta^n(\textbf{x} -\textbf{x}_0)\delta^n(\textbf{p} - \textbf{p}_0)$, and constructing a leading-order short time solution up to $t=\Delta t$ by marginalising the auxiliary momentum $\textbf{p}$ and using the position coordinate $\Delta \textbf{x} = \textbf{x} - \textbf{x}_0$, we have:
+\begin{equation}
+    \partial_t P(\Delta \textbf{x},t) = -\gamma\mathcal{D}_{\textbf{x}}^{\alpha}P(\Delta \textbf{x}, \Delta t) - \nabla_{\mathbf{x}}\cdot
+    \left[\left(\gamma \mathbf{b}(\Delta \textbf{x}) + \beta\,\mathbb{E}[\mathbf{p}\,|\,\Delta \textbf{x},\Delta t]\right)P(\Delta \textbf{x},\Delta t)\right]
+\end{equation}
+where we can truncate these terms to highest order using
+\begin{equation}
+    \mathbf{b}(\Delta \textbf{x}) = \mathbf{b}_0 + \mathcal{O}(\Delta \textbf{x}),\qquad 
+    \mathbb{E}[\mathbf{p}|\Delta \textbf{x},\Delta t] = \mathbf{p}_0 + \mathcal{O}(\Delta t), \qquad
+    \mathbf{v}_0 = \gamma\,\mathbf{b}_0 + \beta\,\mathbf{p}_0
+\end{equation}
+which gives
+\begin{align}
+    \partial_t P(\Delta \textbf{x},\Delta t) &= -\gamma\mathcal{D}^{\alpha}_\textbf{x}P -\nabla_{\mathbf{x}}\cdot
+    \left[\left(\textbf{v}_0 + \mathcal{O}(\Delta \textbf{x}) + \mathcal{O}(\Delta t)\right)P\right]\\
+    \partial_t P(\Delta \textbf{x},\Delta t) &= -\gamma\mathcal{D}^{\alpha}_\textbf{x}P - \mathbf{v}_0\cdot\nabla_{\mathbf{x}}P +  \left[\mathcal{O}(\Delta t^0) + \mathcal{O}(\Delta t^{1 - 1/\alpha})\right] \cdot P\\
+    \partial_t \hat P(\mathbf{k},\Delta t) &= -\gamma\|\mathbf{k}\|^{\alpha}\hat P - i\,\mathbf{v}_0\cdot\mathbf{k}\,\hat P + \mathcal{O}(\Delta t^0)\\
+    \implies \hat P(\mathbf{k},\Delta t) &= \exp\!\left[-\gamma\|\mathbf{k}\|^{\alpha}\Delta t - i\mathbf{v}_0\cdot\mathbf{k}\,\Delta t\right] [1 + \mathcal{O}(\Delta t)]
+\end{align}
+Showing that, to first order in $\Delta t$, the fractional Fokker-Planck under FNS dynamics in \cref{eq:fns} gives a stable distribution
+
+\subsubsection*{Quantification of Lévy superdiffusion}
+
+In calculating absolute fractional moments, a general formula used under the 1-dimensional $k = \|\textbf{k}\|$ is:
+\begin{align}
+    \langle|\Delta x|^q\rangle &= C_q\int_0^\infty \left[ 
+    1 - \mathrm{Re}\left(\hat P(k,\Delta t)\right)
+    \right] k^{-1 - q} dk \\
+    \langle|\Delta x|^q\rangle &= C_q\int_0^\infty \left[ 
+    1 - \cos(v_0 k \, \Delta t)e^{-\gamma \Delta t \,  k^{\alpha}} \left[ 1 + \mathcal{O}(\Delta t) \right]
+    \right] k^{-1 - q} dk \\
+\end{align}
+with 
+\begin{equation}
+    C_q=\frac{1}{-\Gamma(-q)\cos(\pi q/2)}=\frac{2\,\Gamma(1+q)\sin(\pi q/2)}{\pi},\qquad 0<q<2
+\end{equation}
+for $0 < q < \alpha$ and $q < 2$:
+\begin{equation}    
+\langle|\Delta x|^q\rangle =  C_q\left[\frac{\Gamma\!\left(1-\frac q\alpha\right)}{q}\,(\gamma \Delta t)^{q/\alpha}+\frac{\Gamma\!\left(\frac{2-q}{\alpha}\right)}{2\alpha}\,v_0^2\,\gamma^{-2}\;(\gamma \Delta t)^{\,2-\frac{2-q}{\alpha}} + \mathcal{O}(\Delta t ^ {1 + q/ \alpha}) \right]
+\end{equation}
+This analytically gives the prediction that a spectrum of fractional absolute moments will scale as $\langle \| \Delta x \| ^ q \rangle \propto \Delta t ^ {q \lambda(q)}$ with $\lambda(q) = \frac{1}{\alpha}$ for a Lévy flight with $q < \alpha$, and $\lambda(q) = 1$ for $q > \alpha$. This piecewise superdiffusion is a result of the discontinuities in jump dynamics of a Lévy flight which lead to divergent moments, and may lead analysis to present Lévy flight behaviour as being a multifractal, despite it's monofractal scaling definition. There are a number of modelling choices which can be made to remedy this broken scaling law by taming Lévy discontinuities. Suggestions for describing a fuller monofractal superdiffusion would be to use a Lévy walk CRTW structure, as described in \cref{sec:stat_phys}, or otherwise impose an online low-pass filter to gaze trajectories, simulating more realistic muscular control of the eyes without overly altering the neural dynamical system.
