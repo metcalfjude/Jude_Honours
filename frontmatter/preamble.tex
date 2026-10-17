@@ -1,4 +1,5 @@
 \usepackage{bm}
+\usepackage{nomencl}
 \usepackage{geometry}
   \geometry{a4paper, width=160mm, top=25mm, bottom=25mm}
 \pdfpagewidth=\paperwidth 
@@ -19,7 +20,7 @@
  \graphicspath{{figures/}}
 % Graphics. Remove me and you won't have any figures, and that would be very boring.
 
-%\usepackage[usenames,dvipsnames,svgnames,table]{xcolor}
+\usepackage[usenames,dvipsnames,svgnames,table]{xcolor}
 % Adds the ability to make coloured text and lines throughout the document. See documentation for xcolor.
 
 %-------------------- Tables, figures and captions
@@ -52,6 +53,7 @@
 
 %-------------------- Special symbols and fonts
 \usepackage{amssymb}
+
 % Maths symbols
 
 %-------------------- Document sections, headers, footers, and bibliography
@@ -85,9 +87,16 @@
 
 \usepackage{siunitx}
 \sisetup{range-units=single}
+\sisetup{range-phrase = \textendash, range-units = single}
 \DeclareSIUnit{\px}{px}
 
 \usepackage[capitalize, noabbrev]{cleveref}
 
 \usepackage{graphicx}
 \usepackage{subcaption}
+
+
+%------------------- Tabular 
+
+\usepackage{tabularx}
+\usepackage{array}

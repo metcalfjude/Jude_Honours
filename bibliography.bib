@@ -2065,83 +2065,6 @@ Conclusion: A statistical mechanical model architecture that describes foraging 
     url={https://openreview.net/forum?id=cnrwqlr8dg}
 }
 
-@article{Kummerer2022_DeepGazeIII,
-    author = {Kümmerer, Matthias and Bethge, Matthias and Wallis, Thomas S. A.},
-    title = {DeepGaze III: Modeling free-viewing human scanpaths with deep learning},
-    journal = {Journal of Vision},
-    volume = {22},
-    number = {5},
-    pages = {7-7},
-    year = {2022},
-    month = {04},
-    abstract = { Humans typically move their eyes in “scanpaths” of fixations linked by saccades. Here we present DeepGaze III, a new model that predicts the spatial location of consecutive fixations in a free-viewing scanpath over static images. DeepGaze III is a deep learning–based model that combines image information with information about the previous fixation history to predict where a participant might fixate next. As a high-capacity and flexible model, DeepGaze III captures many relevant patterns in the human scanpath data, setting a new state of the art in the MIT300 dataset and thereby providing insight into how much information in scanpaths across observers exists in the first place. We use this insight to assess the importance of mechanisms implemented in simpler, interpretable models for fixation selection. Due to its architecture, DeepGaze III allows us to disentangle several factors that play an important role in fixation selection, such as the interplay of scene content and scanpath history. The modular nature of DeepGaze III allows us to conduct ablation studies, which show that scene content has a stronger effect on fixation selection than previous scanpath history in our main dataset. In addition, we can use the model to identify scenes for which the relative importance of these sources of information differs most. These data-driven insights would be difficult to accomplish with simpler models that do not have the computational capacity to capture such patterns, demonstrating an example of how deep learning advances can be used to contribute to scientific understanding. },
-    issn = {1534-7362},
-    doi = {10.1167/jov.22.5.7},
-    url = {https://doi.org/10.1167/jov.22.5.7},
-    eprint = {https://arvojournals.org/arvo/content_public/journal/jov/938587/i1534-7362-22-5-7_1650885429.74577.pdf},
-}
-
-@ARTICLE{Kummerer2022-au,
-  title     = "Using the {DeepGaze} {III} model to decompose spatial and
-               dynamic contributions to fixation placement over time",
-  author    = "K{\"u}mmerer, Matthias and Wallis, Thomas S A and Bethge,
-               Matthias",
-  abstract  = "Humans view images in scanpaths of fixations, where they move
-               their gaze over the image to explore interesting parts of the
-               image. Which factors govern the principles of such scanpaths and
-               how they change over time has been the subject of substantial
-               research. The deep learning based DeepGaze III model currently
-               sets the state-of-the-art in free-viewing scanpath prediction on
-               natural images. It combines a spatial prediction module, which
-               captures the influence of scene content on fixation placement,
-               with a scanpath history module that captures the influence of
-               earlier fixations and therefore the dynamics of the scanpath.
-               Here, we conduct a series of ablation studies to train variants
-               of DeepGaze III with no access to scene content, scanpath
-               history or both and analyse how well fixations are predicted
-               over the course of free-viewing scanpaths. We find that the
-               overall predictability of fixations decays substantially over
-               the course of scanpaths. Comparing the ablated models allows us
-               to attribute this decay nearly completely to a decay in the
-               influence of scene content: early fixations focus on the most
-               salient image areas. Additionally, there is an influence of the
-               initial fixation, which is mostly decayed after one saccade.
-               Interestingly, the effect of scanpath history stays nearly
-               constant over the scanpaths, suggesting that the dynamics of
-               scene viewing don't change substantially over time. Due to the
-               capacity of our models relative to the size of the dataset, we
-               can assume that the models are able to capture all substantive
-               ways in which fixations could depend on image content and
-               previous fixations (in the context of free viewing). This avoids
-               the possible confounder that the models are simply not good
-               enough to predict fixations well. This study provides an example
-               of how deep learning based models can be used to further our
-               understanding of human behaviour.",
-  journal   = "J. Vis.",
-  publisher = "Association for Research in Vision and Ophthalmology (ARVO)",
-  volume    =  22,
-  number    =  14,
-  pages     = "3964",
-  month     =  dec,
-  year      =  2022,
-  language  = "en"
-}
-
-@article{Izvekov_2025_Mori,
-  title = {Mori-Zwanzig projection operator formalism: Generalized Langevin equation dynamics of a classical system perturbed by an external generalized potential and far from equilibrium},
-  author = {Izvekov, Sergei},
-  journal = {Phys. Rev. E},
-  volume = {111},
-  issue = {3},
-  pages = {034130},
-  numpages = {12},
-  year = {2025},
-  month = {3},
-  publisher = {American Physical Society},
-  doi = {10.1103/PhysRevE.111.034130},
-  url = {https://link.aps.org/doi/10.1103/PhysRevE.111.034130}
-}
-
 @article{La_Camera_2022_meanfieldneuron,
   title     = "The mean field approach for populations of spiking neurons",
   author    = "La Camera, Giancarlo",
@@ -2780,4 +2703,176 @@ This chapter discusses the different aspects of the saccadic rhythm and predicti
 	month = oct,
 	year = {1966},
 	pages = {554--556},
+}
+
+@ARTICLE{Gayet2025-fv,
+  title     = "Feature Integration Theory revisited: attention is not needed to
+               bind stimulus features, but prevents them from falling apart",
+  author    = "Gayet, Surya and Aydemir, S{\"u}heyla",
+  abstract  = "Any object that we look at comprises many different properties
+               (e.g., a color, shape, orientation, and spatial location), all
+               of which are processed in separate brain regions. According to
+               Anne Treisman's influential Feature Integration Theory of
+               attention, these individual properties are processed
+               pre-attentively, whereas attention is needed to `bind' them into
+               integrated objects. Here, we ask during which processing stage
+               attention contributes to binding: during stimulus encoding (to
+               encode stimuli as integrated objects) or during maintenance (to
+               prevent objects from falling apart into their constituents)? In
+               eight lab-based behavioral experiments (N = 8*34), participants
+               memorized four briefly presented visual objects. To manipulate
+               the amount of attention, two of these objects were (pre or post)
+               cued to be likely targets (with 75\% validity). After a delay,
+               one object was probed, and participants had to report its
+               features from memory (e.g., color, location, orientation,
+               category). Recall performance was far better for cued than for
+               uncued items, indicating the success of the attention
+               manipulation. Also, stimulus properties were generally bound, so
+               that recall performance on one feature strongly predicted recall
+               performance on another feature of that same object. However,
+               attention only increased binding strength between features
+               (e.g., color and orientation), but not between features and
+               locations, suggesting that feature-location binding is a
+               pre-attentive process. Finally --and most surprisingly-- the
+               effect of attention on (feature-feature) binding did not depend
+               on whether the cue preceded or succeeded the memory array,
+               showing that attention contributes to binding exclusively during
+               memory maintenance. These findings expand the Feature
+               Integration Theory of attention, by showing that (1) not only
+               the encoding of features occurs pre-attentively, but also the
+               binding of features to locations, and by showing that (2) the
+               role of attention is not to integrate objects during stimulus
+               encoding, but to keep features bound together during stimulus
+               maintenance.",
+  journal   = "J. Vis.",
+  publisher = "Association for Research in Vision and Ophthalmology (ARVO)",
+  volume    =  25,
+  number    =  9,
+  pages     = "1801",
+  month     =  jul,
+  year      =  2025,
+  language  = "en"
+}
+
+@article{itti_model_1998,
+  title = {A model of saliency-based visual attention for rapid scene analysis},
+  volume = {20},
+  copyright = {https://ieeexplore.ieee.org/Xplorehelp/downloads/license-information/IEEE.html},
+  issn = {01628828},
+  url = {http://ieeexplore.ieee.org/document/730558/},
+  doi = {10.1109/34.730558},
+  abstract = {A visual attention system, inspired by the behavior and the neuronal architecture of the early primate visual system, is presented. Multiscale image features are combined into a single topographical saliency map. A dynamical neural network then selects attended locations in order of decreasing saliency. The system breaks down the complex problem of scene understanding by rapidly selecting, in a computationally efficient manner, conspicuous locations to be analyzed in detail.},
+  language = {en},
+  number = {11},
+  urldate = {2026-10-15},
+  journal = {IEEE Transactions on Pattern Analysis and Machine Intelligence},
+  author = {Itti, L. and Koch, C. and Niebur, E.},
+  month = nov,
+  year = {1998},
+  pages = {1254--1259},
+}
+
+
+@article{wolfe_guided_1989,
+	address = {US},
+	title = {Guided search: {An} alternative to the feature integration model for visual search.},
+	volume = {15},
+	issn = {1939-1277(Electronic),0096-1523(Print)},
+	doi = {10.1037/0096-1523.15.3.419},
+	abstract = {Subjects searched sets of items for targets defined by conjunctions of color and form, color and orientation, or color and size. Set size was varied and reaction times (RTs) were measured. For many unpracticed subjects, the slopes of the resulting RT × Set Size functions are too shallow to be consistent with A. Treisman's (see record 1988-00255-001) and A. Treisman and G. Gelade's (see record 1980-04680-001) feature integration model, which proposes serial, self-terminating search for conjunctions. Searches for triple conjunctions (Color × Size × Form) are easier than searches for standard conjunctions and can be independent of set size. A guided search model similar to J. E. Hoffman's (see record 1981-04707-001) two-stage model can account for these data. In the model, parallel processes use information about simple features to guide attention in the search for conjunctions. Triple conjunctions are found more efficiently than standard conjunctions because three parallel processes can guide attention more effectively than two. (PsycInfo Database Record (c) 2025 APA, all rights reserved)},
+	number = {3},
+	journal = {Journal of Experimental Psychology: Human Perception and Performance},
+	publisher = {American Psychological Association},
+	author = {Wolfe, Jeremy M. and Cave, Kyle R. and Franzel, Susan L.},
+	year = {1989},
+	keywords = {*Color Perception, *Form and Shape Perception, *Models, *Size Discrimination, *Visual Search, Attention, Reaction Time},
+	pages = {419--433},
+}
+
+@article{wolfe_guided_2021,
+  title = {Guided {Search} 6.0: {An} updated model of visual search},
+  volume = {28},
+  issn = {1069-9384, 1531-5320},
+  shorttitle = {Guided {Search} 6.0},
+  url = {https://link.springer.com/10.3758/s13423-020-01859-9},
+  doi = {10.3758/s13423-020-01859-9},
+  abstract = {This paper describes Guided Search 6.0 (GS6), a revised model of visual search. When we encounter a scene, we can see something everywhere. However, we cannot recognize more than a few items at a time. Attention is used to select items so that their features can be “bound” into recognizable objects. Attention is “guided” so that items can be processed in an intelligent order. In GS6, this guidance comes from five sources of preattentive information: (1) top-down and (2) bottom-up feature guidance, (3) prior history (e.g., priming), (4) reward, and (5) scene syntax and semantics. These sources are combined into a spatial “priority map,” a dynamic attentional landscape that evolves over the course of search. Selective attention is guided to the most active location in the priority map approximately 20 times per second. Guidance will not be uniform across the visual field. It will favor items near the point of fixation. Three types of functional visual field (FVFs) describe the nature of these foveal biases. There is a resolution FVF, an FVF governing exploratory eye movements, and an FVF governing covert deployments of attention. To be identified as targets or rejected as distractors, items must be compared to target templates held in memory. The binding and recognition of an attended object is modeled as a diffusion process taking {\textgreater} 150 ms/item. Since selection occurs more frequently than that, it follows that multiple items are undergoing recognition at the same time, though asynchronously, making GS6 a hybrid of serial and parallel processes. In GS6, if a target is not found, search terminates when an accumulating quitting signal reaches a threshold. Setting of that threshold is adaptive, allowing feedback about performance to shape subsequent searches. Simulation shows that the combination of asynchronous diffusion and a quitting signal can produce the basic patterns of response time and error data from a range of search experiments.},
+  language = {en},
+  number = {4},
+  urldate = {2026-10-15},
+  journal = {Psychonomic Bulletin \& Review},
+  author = {Wolfe, Jeremy M.},
+  month = aug,
+  year = {2021},
+  pages = {1060--1092},
+}
+
+@article {Ruarte2024.11.29.626088,
+	author = {Ruarte, Gonzalo and Care, Dami{\'a}n and Bujia, Gaston and Ison, Matias J and Kamienkowski, Juan E.},
+	title = {Integrating Ideal Bayesian Searcher and Neural Networks Models for Eye Movement Prediction in a Hybrid Search Task},
+	elocation-id = {2024.11.29.626088},
+	year = {2024},
+	doi = {10.1101/2024.11.29.626088},
+	publisher = {Cold Spring Harbor Laboratory},
+	abstract = {Visual search, where observers search for a specific item, is a crucial aspect of daily human interaction with the visual environment. Hybrid search extends this by requiring observers to search for any item from a given set of objects. While there are models proficient at simulating human eye movement in visual search tasks within natural scenes, none are able to do so in Hybrid search tasks within similar environments. In this work, we present an enhanced version of the neural network Entropy Limit Minimization (nnELM) model, which is based on a Bayesian framework and decision theory. We also present the Hybrid Search Eye Movements (HSEM) Dataset, comprising several thousands of human eye movements during hybrid search tasks in natural scenes. A key challenge in Hybrid search, absent in visual search, is that participants might search for different objects at different time points. To address this, we developed a strategy based on the posterior probability distribution generated after each fixation. By adjusting the model{\textquoteright}s peripheral visibility, we made early search stages more efficient, aligning it closer to human behaviour. Additionally, limiting the model{\textquoteright}s memory capacity reduced its success in longer searches, mirroring human performance. To validate these improvements, we compared our model against participants from the HSEM dataset and against existing models in a visual search benchmark. Altogether, the new nnELM model not only successfully explains Hybrid search tasks, but also closely replicates human behaviour in natural scenes. This work advances our understanding of complex processes underlying visual and Hybrid search while maintaining model interpretability.Competing Interest StatementThe authors have declared no competing interest.},
+	URL = {https://www.biorxiv.org/content/early/2024/11/30/2024.11.29.626088},
+	eprint = {https://www.biorxiv.org/content/early/2024/11/30/2024.11.29.626088.full.pdf},
+	journal = {bioRxiv}
+}
+
+@article{zhou_human_2021,
+  title = {Human visual search follows a suboptimal {Bayesian} strategy revealed by a spatiotemporal computational model and experiment},
+  volume = {4},
+  issn = {2399-3642},
+  url = {https://www.nature.com/articles/s42003-020-01485-0},
+  doi = {10.1038/s42003-020-01485-0},
+  abstract = {Abstract There is conflicting evidence regarding whether humans can make spatially optimal eye movements during visual search. Some studies have shown that humans can optimally integrate information across fixations and determine the next fixation location, however, these models have generally ignored the control of fixation duration and memory limitation, and the model results do not agree well with the details of human eye movement metrics. Here, we measured the temporal course of the human visibility map and performed a visual search experiment. We further built a continuous-time eye movement model that considers saccadic inaccuracy, saccadic bias, and memory constraints. We show that this model agrees better with the spatial and temporal properties of human eye movements and predict that humans have a memory capacity of around eight previous fixations. The model results reveal that humans employ a suboptimal eye movement strategy to find a target, which may minimize costs while still achieving sufficiently high search performance.},
+  language = {en},
+  number = {1},
+  urldate = {2026-10-16},
+  journal = {Communications Biology},
+  author = {Zhou, Yunhui and Yu, Yuguo},
+  month = jan,
+  year = {2021},
+  pages = {34},
+}
+@article{kummerer_deepgaze_2022,
+  title = {{DeepGaze} {III}: {Modeling} free-viewing human scanpaths with deep learning},
+  volume = {22},
+  issn = {1534-7362},
+  url = {https://doi.org/10.1167/jov.22.5.7},
+  doi = {10.1167/jov.22.5.7},
+  abstract = {Humans typically move their eyes in “scanpaths” of fixations linked by saccades. Here we present DeepGaze III, a new model that predicts the spatial location of consecutive fixations in a free-viewing scanpath over static images. DeepGaze III is a deep learning–based model that combines image information with information about the previous fixation history to predict where a participant might fixate next. As a high-capacity and flexible model, DeepGaze III captures many relevant patterns in the human scanpath data, setting a new state of the art in the MIT300 dataset and thereby providing insight into how much information in scanpaths across observers exists in the first place. We use this insight to assess the importance of mechanisms implemented in simpler, interpretable models for fixation selection. Due to its architecture, DeepGaze III allows us to disentangle several factors that play an important role in fixation selection, such as the interplay of scene content and scanpath history. The modular nature of DeepGaze III allows us to conduct ablation studies, which show that scene content has a stronger effect on fixation selection than previous scanpath history in our main dataset. In addition, we can use the model to identify scenes for which the relative importance of these sources of information differs most. These data-driven insights would be difficult to accomplish with simpler models that do not have the computational capacity to capture such patterns, demonstrating an example of how deep learning advances can be used to contribute to scientific understanding.},
+  number = {5},
+  journal = {Journal of Vision},
+  author = {Kümmerer, Matthias and Bethge, Matthias and Wallis, Thomas S. A.},
+  month = apr,
+  year = {2022},
+  pages = {7--7},
+}
+
+@article{18k5-pwl1,
+  title = {Erratum: Mori-Zwanzig projection operator formalism: Generalized Langevin equation dynamics of a classical system perturbed by an external generalized potential and far from equilibrium [Phys. Rev. E 111, 034130 (2025)]},
+  author = {Izvekov, Sergei},
+  journal = {Phys. Rev. E},
+  volume = {113},
+  issue = {2},
+  pages = {029904},
+  numpages = {1},
+  year = {2026},
+  month = {Feb},
+  publisher = {American Physical Society},
+  doi = {10.1103/18k5-pwl1},
+  url = {https://link.aps.org/doi/10.1103/18k5-pwl1}
+}
+
+@article{Einstein1905,
+  author    = {Einstein, A.},
+  title     = {{\"{U}ber} die von der molekularkinetischen Theorie der W{\"{a}}rme geforderte Bewegung von in ruhenden Fl{\"{u}}ssigkeiten suspendierten Teilchen},
+  journal   = {Annalen der Physik},
+  volume    = {322},
+  number    = {8},
+  pages     = {549--560},
+  year      = {1905},
+  doi       = {10.1002/andp.19053220806}
 }

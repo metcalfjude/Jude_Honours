@@ -7,6 +7,37 @@
 \RequirePackage{etoolbox}
 \RequirePackage{graphicx}
 
+\titlespacing*{\chapter}
+{0pt}      % left indentation
+{-40pt}    % space before the chapter title
+{20pt}     % space after the chapter title
+
+% Define heavy bold font command for titles
+\newcommand{\heavybold}{\fontseries{b}\selectfont}
+
+% --- Chapters ---
+\titleformat{\chapter}[block]
+  {\normalfont\Huge\heavybold}
+  {\chaptername \ \thechapter:}
+  {1ex}{\normalfont\Huge\heavybold #1}
+
+% --- Sections ---
+\titleformat{\section}[block]
+  {\normalfont\Large\heavybold}
+  {\thesection}
+  {1em}{\normalfont\Large\heavybold #1}
+% --- Subsections ---
+\titleformat{\subsection}[block]
+  {\normalfont\large\heavybold}
+  {\thesubsection}
+  {1em}{\normalfont\large\heavybold #1}
+
+% --- Subsubsections ---
+\titleformat{\subsubsection}[block]
+  {\normalfont\normalsize\heavybold}
+  {\thesubsubsection}
+  {1em}{\normalfont\normalsize\heavybold #1}
+
 % If statements
 \newif\ifphd
 \newif\ifhonours
@@ -489,11 +520,11 @@
        \fi%
       }%
       \fi
-      \textbf{%
+      {\heavybold{%
        \vspace{\biggap}\\%
        {\Large\@title}\\%
        \vspace{\midgap}%
-      }%
+      }}%
       \@author\\%
       \vspace{\midgap}%
       \textit{%
@@ -623,3 +654,4 @@
 \endinput
 
 % Quidquid latine dictum sit altum videtur.
+

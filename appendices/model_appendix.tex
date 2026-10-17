@@ -1,0 +1,49 @@
+\chapter{Comparison of models of visual search}
+\section{Tabular comparison}
+\begin{table}[h!]
+\centering
+\small
+\renewcommand{\arraystretch}{1.3}
+\begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}p{2.8cm} >{\raggedright\arraybackslash}p{2.5cm} >{\raggedright\arraybackslash}X >{\raggedright\arraybackslash}X}
+\toprule
+\textbf{Model} & \textbf{Core domain} & \textbf{Primary aim} & \textbf{Key features and mechanics} \\
+\midrule
+\textbf{Self-avoiding walk} \newline \textcite{engbert_integrated_2011}
+& Statistical physics and oculomotor control
+& Develop an accurate account of statistical properties of low frequency ocular drift during free viewing fixations.
+& Integrated lattice-based stochastic motion with self-avoidance constraints; a 2D quadratic potential. Does not capture a high frequency peakDoes not extend beyond fixations. \\
+\addlinespace
+\textbf{Least action / active inference} \newline \textcite{NIPS2017_194cf6c2}
+& Bayesian neuroscience and machine learning
+& Unify perception and action by generating scanpaths (trajectories) through variational free-energy minimisation across an informational landscape.
+& Generative deterministic model of scanpath. Sophisticated account of natural image saliency. Does not consider fixational dynamics.\\
+\addlinespace
+\textbf{Ideal Bayesian searcher (IBS)} \newline \textcite{najemnik_optimal_2005, Ruarte2024.11.29.626088, zhou_human_2021}
+& Information- and normative decision theory
+& Establish an optimally informative Bayesian process for target localisation and saccade prediction based on biologically realistic information foraging of the eye.
+& Exact Bayesian belief updating, incorporating biologically realistic retinal resolution gradients, spatial noise, and global entropy reduction. Does not consider continuous time, instead discrete saccades are individually considered.\\
+\addlinespace
+\textbf{DeepGaze} \newline \textcite{abdelrahman_deep_2026}, see also \cite{kummerer_modeling_2025,kammerer2016deepgaze2, kummerer_deepgaze_2022, huang_salicon_2015}
+& Deep learning and computer vision
+& Construct a neural network to predict human scanpaths (search trajectories) on natural images with high empirical accuracy.
+& Modular deep neural network built on pretrained vision backbones; \\ % models internal state shifts, fixation history, and centre bias. Does not aim for a biologically realistic model, and operates in discrete time, only considering discrete saccade locations.
+\addlinespace
+\textbf{Itti--Koch--Niebur model} \newline \textcite{itti_model_1998}
+& Biologically inspired vision
+& Simulate bottom-up, stimulus-driven visual attention based on the early primate visual pathways.
+& Multi-scale feature extraction (colour, intensity, orientation); winner-take-all selection with inhibition of return (IOR). \\
+\addlinespace
+% \textbf{Feature-integration theory} \newline \textcite{Gayet2025-fv}
+% & Cognitive psychology
+% & Explain the experimental differences in performance during sparse- and dense search tasks.
+% & Pre-attentive, parallel registration of features in separate feature maps; focused attention binds features at a location, producing serial search for conjunctions.\\ % Highly biologically motivated, but not generative or explanatory for eye movement measurement
+% \addlinespace
+\textbf{Guided search} \newline \textcite{wolfe_guided_1989, wolfe_guided_2021}
+& Cognitive psychology
+& Account for the continuum of multi-scale search efficiency by combining bottom-up and top-down guidance of attention.
+& Parallel feature maps are weighted by stimulus salience and the target template to form an activation map; attention is deployed serially in order of decreasing activation. \\
+\bottomrule
+\end{tabularx}
+\caption{Comparison of prominent visual search and gaze dynamics modelling paradigms. Many such models consider the same problem of accounting for visual search from different perspectives. For instance, many models are biologically motivated accounts of biological attention, whereas others are highly empirically accurate generative models trained on human data, designed to test hypotheses in visual dynamics, such as in \cite{abdelrahman_deep_2026}.}
+\label{tab:search_models_comparison}
+\end{table}

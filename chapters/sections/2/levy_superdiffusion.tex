@@ -2,7 +2,7 @@
 The equations of motion for our system are derived from the over-damped Langevin regime, driven by Lévy noise. Such underlying dynamics are known as Lévy flight (see \ref{subsec:levy_motion}) and are the paradigm superdiffusive system. However, both the adaptive kernel dynamics, and auxiliary momentum dynamics add complexity to the superdiffusive properties of the model. Quantifying superdiffusion in this system exploring a confined and dynamic potential landscape introduces two distinct and challenging problems: firstly, a kind of inter-modal superdiffusion is introduced through adaptive kernel dynamics which expel the walker from potential wells, and secondly a superdiffusion on small spatiotemporal scales results from near-ballistic momentum-driven harmonic oscillations.
 
 \subsubsection*{Analysis of Lévy flight superdiffusion from the fractional Fokker-Planck equation}
-Lévy processes are the canonical form of superdiffusion, yet the analysis of the precise form of statistical diffusion scaling requires close analysis. Lévy flight superdiffusion is analysed from the deterministic dynamics of the probability distribution of jump size $P(\| \Delta x \|)$ dynamics of the probability distribution. This is because the dynamics of the probability distribution is governed by the fractional Fokker Planck equation as in \cite{barkai_fractional_2001, boffi_probability_2023, qi_fractional_2022}. Considering the phase space of our coupled differential equations as $\textbf{z} = [\textbf{x}, \textbf{y}]$, the fractional Fokker-Planck equation can be analysed:
+Lévy processes are the canonical form of superdiffusion, yet the analysis of the precise form of statistical diffusion scaling requires close analysis. Lévy flight superdiffusion is analysed from the deterministic dynamics of the probability distribution of jump size $P(\| \Delta x \|)$ dynamics of the probability distribution. This is because the dynamics of the probability distribution is governed by the fractional Fokker Planck equation as in \cite{barkai_fractional_2001, boffi_probability_2023, qi_fractional_2022}. Considering the phase space of our coupled differential equations as $\textbf{z} = [\textbf{x}, \textbf{p}]$, the fractional Fokker-Planck equation can be analysed:
 \begin{equation}\label{eq:fractional_fokker_planck}
     \frac{\partial P(\textbf{z}, t)}{\partial t} = - (\textbf{D} + \textbf{Q})\frac{\partial}{\partial \textbf{z}} \left[ b(\textbf{z}) P(\textbf{z}, t)\right] - \textbf{D} \mathcal{D}_{\textbf{z}}^{\alpha} P(\textbf{z}, t)
 \end{equation}
@@ -38,7 +38,7 @@ Showing that, to first order in $\Delta t$, the fractional Fokker-Planck under F
 
 \subsubsection*{Quantification of Lévy superdiffusion}
 
-In calculating absolute fractional moments, a general formula used under the 1-dimensional $k = \|\textbf{k}\|$ is:
+In calculating absolute fractional moments, we can reduce our 
 \begin{align}
     \langle|\Delta x|^q\rangle &= C_q\int_0^\infty \left[ 
     1 - \mathrm{Re}\left(\hat P(k,\Delta t)\right)
@@ -49,10 +49,10 @@ In calculating absolute fractional moments, a general formula used under the 1-d
 \end{align}
 with 
 \begin{equation}
-    C_q=\frac{1}{-\Gamma(-q)\cos(\pi q/2)}=\frac{2\,\Gamma(1+q)\sin(\pi q/2)}{\pi},\qquad 0<q<2
+    C_q=\frac{q(1-q)}{\cos(\frac{q\pi}{2})\Gamma(-q)}
 \end{equation}
-for $0 < q < \alpha$ and $q < 2$:
+for $1 < q < \alpha$ and $q < 2$:
 \begin{equation}    
 \langle|\Delta x|^q\rangle =  C_q\left[\frac{\Gamma\!\left(1-\frac q\alpha\right)}{q}\,(\gamma \Delta t)^{q/\alpha}+\frac{\Gamma\!\left(\frac{2-q}{\alpha}\right)}{2\alpha}\,v_0^2\,\gamma^{-2}\;(\gamma \Delta t)^{\,2-\frac{2-q}{\alpha}} + \mathcal{O}(\Delta t ^ {1 + q/ \alpha}) \right]
 \end{equation}
-This analytically gives the prediction that a spectrum of fractional absolute moments will scale as $\langle \| \Delta x \| ^ q \rangle \propto \Delta t ^ {q \lambda(q)}$ with $\lambda(q) = \frac{1}{\alpha}$ for a Lévy flight with $q < \alpha$, and $\lambda(q) = 1$ for $q > \alpha$. This piecewise superdiffusion is a result of the discontinuities in jump dynamics of a Lévy flight which lead to divergent moments, and may lead analysis to present Lévy flight behaviour as being a multifractal, despite it's monofractal scaling definition. There are a number of modelling choices which can be made to remedy this broken scaling law by taming Lévy discontinuities. Suggestions for describing a fuller monofractal superdiffusion would be to use a Lévy walk CRTW structure, as described in \cref{sec:stat_phys}, or otherwise impose an online low-pass filter to gaze trajectories, simulating more realistic muscular control of the eyes without overly altering the neural dynamical system.
+This analytically gives the prediction that a spectrum of fractional absolute moments will scale as $\langle \| \Delta x \| ^ q \rangle \propto \Delta t ^ {\lambda(q)}$ with $\lambda(q) = \frac{q}{\alpha}$. Thus, FNS dynamics are shown to give the same diffusion for a Lévy flight with $q < \alpha$, and $\lambda(q) = 1$ for $q > \alpha$, with an oscillatory diffusion to higher order due to $v_0$ momentum-driven terms. This piecewise superdiffusion is a result of the discontinuities in jump dynamics of a Lévy flight which lead to divergent moments, and may lead analysis to present Lévy flight behaviour as being a multifractal, despite it's monofractal scaling definition. There are a number of modelling choices which can be made to remedy this broken scaling law by taming Lévy discontinuities. Suggestions for describing a fuller monofractal superdiffusion would be to use a Lévy walk CRTW structure, as described in \cref{sec:stat_phys}, or otherwise impose an online low-pass filter to gaze trajectories, simulating more realistic muscular control of the eyes without overly altering the neural dynamical system.

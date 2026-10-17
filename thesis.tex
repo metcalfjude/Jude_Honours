@@ -4,16 +4,7 @@
 \input{frontmatter/preamble} 
 \usepackage{style/title}[Honours]
 % \usepackage[a4paper, margin=0.5in]{geometry}
-
-\titlespacing*{\chapter}
-{0pt}      % left indentation
-{-40pt}    % space before the chapter title
-{20pt}     % space after the chapter title
-
-\titleformat{\chapter}[block]
-    {\bfseries\huge}{\filright\huge Chapter \thechapter:}{1ex}{\huge\filright #1}
-
-%\makenomenclature
+\makenomenclature
 
 % Add your bibtex file here
 \addbibresource{bibliography.bib}
@@ -22,7 +13,8 @@
 \begin{document}
 	
 	%-------------- Information For The Title Page
-	\title{Nested oscillations and superdiffusion in visual search trajectories and their computational roles in active vision}
+	\title{Superdiffusion and nested oscillation
+    in visual search dynamics}
 	\author{Jude Luca Metcalf}
 	\date{2026} 
 	\degree{Bachelor of Science (Honours)} 
@@ -63,8 +55,9 @@
 	
 	%-------------- Appendices
 	\cleardoublepage
-	% \appendix
-	% \include{appendices/appendix1}
+	\appendix
+    \gdef\chaptername{Appendix}
+	\include{appendices/model_appendix}
 	
 	%-------------- Bibliography
 	\cleardoublepage
