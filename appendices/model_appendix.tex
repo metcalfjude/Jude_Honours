@@ -1,22 +1,22 @@
-\chapter{Prior models of visual search}
+\chapter{Prior models of visual search}\label[appendix]{app:prior_models}
 %\section{Tabular comparison}
 \begin{table}[H]
 	\centering
 	\footnotesize
 	\renewcommand{\arraystretch}{1.3}
-	\rowcolors{2}{gray!6}{white}
+	\rowcolors{2}{white}{gray!6}
 	\captionsetup{width=1.0\textwidth} 
 	\begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}p{2.6cm} >{\raggedright\arraybackslash}p{2.4cm} >{\raggedright\arraybackslash}p{3.6cm} >{\raggedright\arraybackslash}X}
 		\toprule
 		\textbf{Model} & \textbf{Core domain} & \textbf{Primary aim} & \textbf{Key features} \\
 		\midrule
 		\textbf{Ideal Bayesian searcher (IBS)} \newline \textcite{najemnik_optimal_2005}, see also \cite{Ruarte2024.11.29.626088, zhou_human_2021}
-		& Information and decision theory
+		& Information- and decision theory
 		& Establish an optimally informative process for saccade localisation based on biologically realistic information foraging of the eye.
 		& Exact Bayesian belief updating, incorporating biologically realistic retinal resolution gradients, spatial noise, and global entropy reduction. Considers discrete saccades rather than continuous time. \\
 		\addlinespace
 		\textbf{Least action / active inference} \newline \textcite{NIPS2017_194cf6c2}
-		& Bayesian neuroscience and machine learning
+		& Machine learning
 		& Generating scanpaths (trajectories) through physics-inspired variational informational free-energy minimisation.
 		& Generative deterministic model of scanpaths. Sophisticated account of natural image saliency. Does not consider fixational dynamics, does not aim to be biologically realistic.\\
 		\addlinespace
@@ -46,6 +46,6 @@
 		& Parallel feature maps weighted by stimulus salience and target template to form an activation map; serial deployment of attention in decreasing activation order. \\
 		\bottomrule
 	\end{tabularx}
-	\caption{\textbf{Review of a selection of influential models of visual search and gaze dynamics.} Comparison across core theoretical domains, primary objectives, and defining operational features. Models span a spectrum from biologically grounded frameworks prioritising physiological mechanisms (e.g., Feature-Integration Theory, Itti--Koch--Niebur) to normative and computational architectures optimised for empirical trajectory prediction on complex natural scenes (e.g., Ideal Bayesian Searcher, DeepGaze). Important features which share analogy in the model presented in this thesis include: an information kernel (in discrete time) from the approach in \textcite{najemnik_optimal_2005}, the second-order (noiseless) dynamical system coupled to a complex account of saliency gradients presented in \textcite{NIPS2017_194cf6c2}, and the description of the rich non-tremor fixational random motion in the presented in \textcite{engbert_integrated_2011}.}
+	\caption{\textbf{Review of a selection of influential models of visual search and gaze dynamics.} Comparison across core theoretical domains, primary objectives, and defining operational features. Models span a spectrum from biologically grounded frameworks prioritising physiological mechanisms (e.g., Feature-Integration Theory, Itti--Koch--Niebur) to normative and computational architectures optimised for empirical trajectory prediction on complex natural scenes (e.g., Ideal Bayesian Searcher, DeepGaze). Important features which share analogy in the model presented in this thesis include: an information kernel (in discrete time) from the approach in \textcite{najemnik_optimal_2005}, the second-order (noiseless) dynamical system coupled to a rich account of saliency gradients presented in \textcite{NIPS2017_194cf6c2}, and the description of the rich non-tremor fixational random motion in the presented in \textcite{engbert_integrated_2011}.}
 	\label{tab:search_models_colored}
 \end{table}
