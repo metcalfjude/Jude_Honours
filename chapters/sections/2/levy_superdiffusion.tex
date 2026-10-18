@@ -28,13 +28,15 @@ where we can truncate these terms to highest order using
 \end{equation}
 which gives
 \begin{align}
+	\nonumber
     \partial_t P(\Delta \textbf{x},\Delta t) &= -\gamma\mathcal{D}^{\alpha}_\textbf{x}P -\nabla_{\mathbf{x}}\cdot
     \left[\left(\textbf{v}_0 + \mathcal{O}(\Delta \textbf{x}) + \mathcal{O}(\Delta t)\right)P\right]\\
+    \nonumber
     \partial_t P(\Delta \textbf{x},\Delta t) &= -\gamma\mathcal{D}^{\alpha}_\textbf{x}P - \mathbf{v}_0\cdot\nabla_{\mathbf{x}}P +  \left[\mathcal{O}(\Delta t^0) + \mathcal{O}(\Delta t^{1 - 1/\alpha})\right] \cdot P\\
     \partial_t \hat P(\mathbf{k},\Delta t) &= -\gamma\|\mathbf{k}\|^{\alpha}\hat P - i\,\mathbf{v}_0\cdot\mathbf{k}\,\hat P + \mathcal{O}(\Delta t^0)\\
     \implies \hat P(\mathbf{k},\Delta t) &= \exp\!\left[-\gamma\|\mathbf{k}\|^{\alpha}\Delta t - i\mathbf{v}_0\cdot\mathbf{k}\,\Delta t\right] [1 + \mathcal{O}(\Delta t)]
 \end{align}
-Showing that, to first order in $\Delta t$, the fractional Fokker-Planck under FNS dynamics in \cref{eq:fns} gives a stable distribution
+Showing that, to first order in $\Delta t$, the fractional Fokker-Planck under FNS dynamics in \cref{eq:fns_system} gives a stable distribution
 
 \subsubsection*{Quantification of Lévy superdiffusion}
 
