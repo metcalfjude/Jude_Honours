@@ -189,20 +189,61 @@ The information--entropy gradient, $\text{IG}_{\text{H}}$, measures the gradient
 %% ====================================================================
 \subsection{Summary}
 \Cref{tab:metric_pattern_summary} collects the expected effect of each pattern on each metric. Gamma oscillations act at the finest scale to probe local gradients, theta rhythmicity organises when sampling transitions between wells, and superdiffusion sets where the sampler can go. Together they cover complementary aspects of the information-gain curve.
-
 \begin{table}[htbp]
 	\centering
-	\caption{Expected effect of each dynamical pattern on each metric. Entries are the mechanisms described in this section, to be confirmed against the results.}
+	\footnotesize
+	\caption{Expected effect of each dynamical pattern on each metric. 
+		Entries summarise the proposed mechanisms and are to be confirmed 
+		against the results.}
 	\label{tab:metric_pattern_summary}
-	\begin{tabular}{@{}p{0.17\textwidth}p{0.25\textwidth}p{0.25\textwidth}p{0.25\textwidth}@{}}
+	
+	\renewcommand{\arraystretch}{1.5}
+	\setlength{\tabcolsep}{3pt}
+	
+	\begin{tabularx}{\textwidth}{
+			@{}
+			>{\raggedright\arraybackslash}m{0.14\textwidth}
+			|>{\raggedright\arraybackslash}X
+			|>{\raggedright\arraybackslash}X
+			|>{\raggedright\arraybackslash}X
+			@{}
+		}
 		\toprule
-		Metric & Gamma oscillations & Theta rhythmicity & Superdiffusion \\
+		\textbf{Metric}
+		& \textbf{Gamma oscillations}
+		& \textbf{Theta rhythmicity}
+		& \textbf{Superdiffusion} \\
 		\midrule
-		IV & Faster local extraction & No time wasted in depleted wells & Access to new high-likelihood regions \\
-		FPT & Responsive to landscape changes & Sets mean wait; narrower spread & Global access; escapes local traps \\
-		Shape & Front-loaded within wells & Closer to linear at fixed $\tau$ & Sustains gain late in trial \\
-		Gini & Tests evenness across windows & Evenly spread information & Possible bursts at mode changes \\
-		$\text{IG}_{\text{H}}$ & Gradient-directed deposition & Indirect, via well exploitation & Reduces entropy at unexplored modes \\
+		
+		IV
+		& Faster local information extraction
+		& Avoids wasted time in depleted wells
+		& Accesses new high-likelihood regions \\
+		
+		\midrule
+		FPT
+		& Responds to landscape changes
+		& Sets mean waiting time; narrows spread
+		& Enables global access and escape from local traps \\
+		
+		\midrule
+		Shape
+		& Front-loads information gain within wells
+		& Keeps accumulation closer to linear at fixed $\tau$
+		& Sustains information gain later in the trial \\
+		
+		\midrule
+		Gini
+		& Tests evenness across time windows
+		& Promotes more evenly distributed information gain
+		& May produce bursts of information at mode changes \\
+		
+		\midrule
+		$\mathrm{IG}_{\mathrm{H}}$
+		& Supports gradient-directed deposition
+		& Acts indirectly through well exploitation
+		& Changes information gain through exploration of new modes \\
+		
 		\bottomrule
-	\end{tabular}
+	\end{tabularx}
 \end{table}

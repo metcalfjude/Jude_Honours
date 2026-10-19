@@ -1,9 +1,16 @@
 \section{Gamma oscillations during visual fixation}\label{sec:gamma_oscillations}
+The second most important time- and spatial scale of gaze dynamics are those of high frequency fixational dynamics. Typically fixational dynamics are divided into microsaccades, low-frequency linear drift, and high frequency ocular tremor. There is evidence that microsaccades are driven by the same statistics and process as regular (called macro-) saccades, and linear drifts have been found to be important in gathering information. An account of low-frequency linear drift easily fits into the model presented here, for instance as steep peak in the dynamical kernel or a simple drift in the potential landscape, producing a self-avoiding walk as described in \cite{engbert_integrated_2011} and described in \cref{tab:search_models_colored}.
 
-
-\subsection{Previous treatment as \textit{ocular microtremor}}
+The current study is the first to make a well-motivated prediction concerning the neural origin and structure of high-frequency ocular microtremor. Identifying ocular tremor as high frequency gamma-scale visual sampling is a novel and useful approach in understanding perceptual sampling. Ocular tremor, under this hypothesis, will originate in the neural control of visual information sampling, likely in the brainstem where eye movements originate [CITE]. 
+\subsection{Previous treatment as ocular microtremor}
+The high frequency ocular tremor is the smallest fixational motion, only existing with amplitude of around one minute of arc. Although, it is nonetheless recently shown to be very important in dynamically sampling high contrast details and high spatial frequencies in images. and is increasingly studied as measurement equipment are non-invasive and designed to accurately and measure low-amplitude high-frequency ocular signals. 
 
 \subsection{Analysis of fixational Fourier spectra}
+This is the first study to examine the high frequency fixational tremor during visual search. Other studies have constructed artificial tasks where subjects are instructed to fixate on a point of interest for extended periods, often stabilising the head with bite-bars. Such setups are not designed to represent natural gaze dynamics, especially during a search task. The computational difficulty in extracting such low-amplitude, high frequency signals from the data in \cite{naher_primate_saccades} is twofold: Firstly, the fixations only contain an average of around \qty{200}{\milli \second} of data, and leaving only an approximate 10 periods of such high frequency signals, and secondly such high frequency signals are often error-prone when examining noise-containing positional data. 
+
+We are lucky in that we have a large amount of data with a very high quality, sampled at a temporal sampling frequency of \qty{1000}{\hertz}, and with arcsecond precision [CITE PROPER VALUE]. Since the data will then contain low frequency drifts, we expect a power spectral density to scale as $\text{PSD}(\textbf{x}) \sim f^{-2}$, and thus when analysing, we correct this slope by applying a finite-differencing time derivative to extract velocity, where the null hypothesis of no significant tremor peak would result in white noise $\text{PSD} (\textbf{v}) \sim 1$.
+
+Our data pipeline here is thus to apply a light 4th-order Buterworth low-pass filter at \qty{200}{\hertz} to handle high-frequency instrumental noise, extract 2D velocity for each eye through central-differencing the positional data, and performing Fourier analysis on such velocity data.
 
 % \begin{figure}[htbp]
 %     \centering
