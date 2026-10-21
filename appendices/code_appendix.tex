@@ -1,0 +1,25 @@
+\chapter{Code availability}\label{app:code}
+
+\begin{table}[H]
+	\centering
+	\captionsetup{width=1.0\textwidth} 
+	\begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}p{5.2cm} >{\raggedright\arraybackslash}X}
+		\toprule
+		\textbf{Repository} & \textbf{Function}\\
+		\midrule
+		\textbf{\href{https://github.com/yourusername/VisualFNS.jl}{\texttt{VisualFNS.jl}}}
+		& Producing simulations, visualisations, and raw data of gaze trajectories through numerically integrating the system \cref{eq:fns_system} with kernel adaptation under \cref{eq:kernel_law}. Important techniques in solving this system were the use of the Euler–Maruyama numerical scheme for SDE integration and the Fourier-space spectral solution of kernel updates.\\
+		\addlinespace
+		\textbf{\href{https://github.com/yourusername/VisualFNS_Analysis.jl}{\texttt{VisualFNS\_Analysis.jl}}}
+		& Analysing trajectory data which was output from \href{https://github.com/yourusername/VisualFNS.jl}{\texttt{VisualFNS.jl}}. Involved producing power spectra, marking intervals between saccade-like transitions, and analysing superdiffusive scaling.\\
+		\addlinespace
+		\textbf{\href{https://github.com/yourusername/VisualData_Analysis.jl}{\texttt{VisualData\_Analysis.jl}}}
+		& Loading in the data provided from \textcite{naher_primate_saccades}, and analysing it in the same way as in \href{https://github.com/yourusername/VisualFNS_Analysis.jl}{\texttt{VisualFNS\_Analysis.jl}}. Involved producing power spectra, marking intervals between saccade-like transitions, and analysing superdiffusive scaling. Originally forked from \href{https://github.com/yourusername/FractionalSaccades.jl}{\texttt{FractionalSaccades.jl}}.\\
+		\addlinespace
+		\textbf{\href{https://github.com/yourusername/FractionalNeuralSampling.jl}{\texttt{FractionalNeuralSampling.jl}}}
+		& The project which provides basic methods to formalise the FNS equation and its variants in the syntax solvable through \texttt{DifferentialEquations.jl}.\\
+		\bottomrule
+	\end{tabularx}
+	\caption{\textbf{A list of repositories containing the code used in this thesis.} All code was written in Julia, apart from some helper scripts written in Python.}
+	\label{tab:code_availability}
+\end{table}
