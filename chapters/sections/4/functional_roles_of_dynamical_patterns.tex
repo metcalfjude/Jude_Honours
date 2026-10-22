@@ -1,6 +1,6 @@
 \section{Functional roles of dynamical patterns}\label{sec:functional_roles_of_dynamical_patterns}
 
-The dynamics studied in this thesis are characterised by three distinct spatiotemporal signatures: gamma-band oscillations, theta-scale rhythmicity, and superdiffusive spatial trajectories. The framework of \cref{chap:a_unifying_model}, which models \cref{eq:fns_system} in a search task, unifies these signatures as coupled dynamics that provide flexible functional roles in basic computation. In this section we identify each pattern with a role in sampling: local exploitation in gamma oscillations, temporal organisation in theta rhythmicity, and global exploration through $\alpha$-superdiffusion. To make these roles precise, we define a set of information-theoretic metrics of search efficiency and, for each metric in turn, describe how each of the three patterns affects it.
+The dynamics studied in this thesis are characterised by three distinct spatiotemporal signatures: gamma-band oscillations, theta-scale rhythmicity, and superdiffusive spatial trajectories. The framework of \cref{chap:a_unifying_model}, constructs a biologically-motivated model to produce these signatures through  an abstract search task. In \cref{chap:empirical_validations} we found that the same dynamics have been found to be important in studying real human gaze trajectories, especially during realistic search tasks. In this section we make use of the theoretical foundations of this model as a sampling theory, and identify the functional advantages of each pattern in an abstract sampling process which the brain would be trained to complete: local exploitation in gamma oscillations, temporal organisation in theta rhythmicity, and global exploration through Lévy $\alpha$-superdiffusion. To make these roles precise, we define a set of information-theoretic metrics for search efficiency and, for each metric in turn, describe how each of the three patterns effects it.
 
 The three patterns are controlled by distinct parts of the model:
 \begin{itemize}
@@ -192,10 +192,6 @@ The information--entropy gradient, $\text{IG}_{\text{H}}$, measures the gradient
 \begin{table}[htbp]
 	\centering
 	\footnotesize
-	\caption{Expected effect of each dynamical pattern on each metric. 
-		Entries summarise the proposed mechanisms and are to be confirmed 
-		against the results.}
-	\label{tab:metric_pattern_summary}
 	
 	\renewcommand{\arraystretch}{1.5}
 	\setlength{\tabcolsep}{3pt}
@@ -246,4 +242,6 @@ The information--entropy gradient, $\text{IG}_{\text{H}}$, measures the gradient
 		
 		\bottomrule
 	\end{tabularx}
+		\caption{Expected effect of each dynamical pattern on each metric. Entries summarise the proposed mechanisms and are to be confirmed  against the results.}	
+	\label{tab:metric_pattern_summary}
 \end{table}
