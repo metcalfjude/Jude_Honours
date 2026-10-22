@@ -5,6 +5,39 @@ Superdiffusion is often a prominent pattern in natural dynamical systems, where 
 The most important methodological choice in accurately characterising visual diffusion patterns is the choice to time-average displacements, and choosing a short  timescale over which diffusion scaling is considered. As demonstrated by \textcite{vilk_strong_2025}, aggregating data across disparate temporal regimes can wash out localised scaling behaviours, yielding an artefact of normal diffusion. Studies which construct regimes of normal and subdiffusive regimes are thus common when examining eye movements, but this ignores the continuous-time superdiffusion which we unify under multiple scales. For such studies, see \cite{lencastre_dynamical_2025, leroux_random_2021, roberts_fixational_2013, collewijn_significance_2008}
 
 \subsubsection*{Analysis of multiscale superdiffusion in eye-tracking data}
+\begin{figure}[htbp!]
+	\centering
+	\begin{subfigure}[t]{0.38\textwidth}
+		\centering
+		\includegraphics[width=\linewidth]{figures/superdiffusion/data/rescaled_moment_spectrum.pdf}
+		\caption{Data: rescaled moments}
+		\label{subfig:fad_data}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[t]{0.6\textwidth}
+		\centering
+		\includegraphics[width=\linewidth]{figures/superdiffusion/data/lambda_vs_q_fit.pdf}
+		\caption{Data: spectrum $\lambda(q)$}
+		\label{subfig:scaling_order_data}
+	\end{subfigure}
+	\vfill
+	\begin{subfigure}[t]{0.38\textwidth}
+		\centering
+		\includegraphics[width=\linewidth]{figures/superdiffusion/model/rescaled_moment_spectrum.pdf}
+		\caption{Model: rescaled moments}
+		\label{subfig:fad_model}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[t]{0.6\textwidth}
+		\centering
+		\includegraphics[width=\linewidth]{figures/superdiffusion/model/lambda_vs_q_fit.pdf}
+		\caption{Model: spectrum $\lambda(q)$}
+		\label{subfig:scaling_order_model}
+	\end{subfigure}
+	\caption{\textbf{Monoscaling superdiffusion in human visual search trajectories and in the model.}
+		Time-averaged fractional absolute displacements $\langle \|\Delta\mathbf{x}\|^{q}\rangle$, which generalise the mean squared displacement to a spectrum of orders $q$, with small $q$ emphasising small fixational displacements and large $q$ emphasising saccades. The top row shows binocular-averaged gaze data, with moments ensemble-averaged over all 22 subjects of \textcite{naher_primate_saccades} (approximately 10,000 s of data; exact sample size to be updated). The bottom row shows the same analysis applied to trajectories simulated from the model of \cref{chap:a_unifying_model}. \textbf{(a,c)}~Moments rescaled as $M_q(\Delta t) \propto \langle\|\Delta\mathbf{x}\|^{q}\rangle^{1/q}$ and normalised to $M_q(1~\text{ms}) = 1$, for 30 values of $q$ from $0.1$ to $3.0$. In log--log space the slope of each curve is $\lambda(q)/q$. \textbf{(b,d)}~Scaling exponents $\lambda(q)$ from power-law fits to the curves on the left, up to $\Delta t = \qty{30}{\ms}$. For the data, the relation is linear, $\lambda(q) = (0.893 \pm 0.006)\,q$ with $R^2 = 0.999$, so all moments share a single scaling exponent. This corresponds to a Lévy stability index $\alpha = q/\lambda(q) = 1.120 \pm 0.007$, well below the Brownian value $\alpha = 2$, indicating strong superdiffusion from fixational scales to saccades. For the model, the fit gives $\lambda(q) = (\,0.917 \pm 0.004\,)\,q$, i.e.\ $\alpha = 1.091 \pm 0.005$.} 
+	\label{fig:search_superdiffusion}
+\end{figure}
 We analyse the binocular-averaged gaze trajectories over all 22 human subjects provided from the study in \textcite{naher_primate_saccades}, as described in \cref{sec:model_setup}. From the onset of the search task, we time-average the fractional absolute displacements $\langle \|\Delta \textbf{x}(\Delta t) \|^q \rangle $ for 30 values of $q$ linearly separated from $q=0.1$ to $q=3.0$. These fractional absolute displacements are evaluated across all valid time lags $\Delta t< \qty{1000}{\ms}$ with a resolution of $\Delta t = \qty{1}{\ms}$. All intervals containing NaN values (such as blinks) are ignored. We then ensemble-average these displacements across all subjects.
 
 We perform a linear best-fit in log-log space of these absolute fractional displacements to find power-law diffusive scaling with time, thus sampling from our moment spectrum function $\lambda(q)$ as defined in \cref{eq:MFD}. Each of these fractional absolute displacements are shown in \cref{subfig:fad}. The moment spectrum function $\lambda(q)$ thus is found to have a good fit to $\lambda(q) = (0.893 \pm 0.006)q$ with an error in the fit of $R^2 = 0.999$. This behaviour gives monoscaling across the shortest to longest spatial scales of fixations to saccades. The corresponding Lévy exponent given such linear monoscaling in $\lambda(q)$ is thus found to be $\alpha = \frac{q}{\lambda(q)} = 1.120 \pm 0.007$.
@@ -15,41 +48,7 @@ We perform a linear best-fit in log-log space of these absolute fractional displ
 \end{equation}
 with $C_q$ defined such that $M_q(\Delta t_{\text{min}})=1$ to give a shared origin at the first time lag $\Delta t$. Small $q$ gives strong weight to the small, frequent displacements of fixational motion, while large $q$ weights the rare, large displacements which are given in saccades. The shape of $\lambda(q)$ therefore tests whether one exponent may describe superdiffusion on all scales. A linear spectrum, $\lambda(q) = q/\alpha$, is monoscaling: all moments grow with the same exponent, as for a self-similar Lévy process with stability index $\alpha$. A nonlinear spectrum is the general case found in many systems called strong anomalous diffusion which consist of two dynamical strategies stitched together at different scales \cite{vilk_strong_2025, cagnetta_strong_2015, castiglione_strong_1999, rebenshtok_non-normalizable_2014, wang_strong_2020}
 
-\cref{subfig:fad_data} shows the rescaled moments $M_q(\Delta t)$ for the human eye-tracking data. Under this rescaling, the slope of each curve in log--log space is $\lambda(q)/q$. Monoscaling therefore predicts that these curves share a single slope across the whole spectrum of $q$, with $\frac{\lambda(q)}{q} = 1/\alpha$. For comparison, Brownian motion ($\alpha = 2$) has slope $1/2$ and ballistic motion has slope $1$ across the entire spectrum $q$. The monoscaling exponent is found by performing a linear regression to our spectrum $\lambda(q)$. \cref{subfig:scaling_order_data} shows these fitted exponents $\lambda(q)$ against $q$. The linear fit is good, with $\lambda(q) = (0.893 \pm 0.006)\,q$ and $R^2 = 0.999$, across the whole considered range $0.1 \le q \le 3.0$. This gives a Lévy index $\alpha = q/\lambda(q) = 1.120 \pm 0.008$, which is well below the Brownian value of $2$ and so indicates strong superdiffusion. Because the spectrum is well described by a linear regression, there is no crossover in scaling between the low-$q$ moments that probe fixational motion and the high-$q$ moments that probe saccades. A single exponent describes both, validating the unifying model derived from FNS dynamics.
-\begin{figure}[htbp!]
-    \centering
-    \begin{subfigure}[t]{0.38\textwidth}
-        \centering
-        \includegraphics[width=\linewidth]{figures/superdiffusion/data/rescaled_moment_spectrum.pdf}
-        \caption{Data: rescaled moments}
-        \label{subfig:fad_data}
-    \end{subfigure}
-    \hfill
-    \begin{subfigure}[t]{0.6\textwidth}
-        \centering
-        \includegraphics[width=\linewidth]{figures/superdiffusion/data/lambda_vs_q_fit.pdf}
-        \caption{Data: spectrum $\lambda(q)$}
-        \label{subfig:scaling_order_data}
-    \end{subfigure}
-
-    \vspace{1em}
-    \begin{subfigure}[t]{0.38\textwidth}
-        \centering
-        \includegraphics[width=\linewidth]{figures/superdiffusion/model/rescaled_moment_spectrum.pdf}
-        \caption{Model: rescaled moments}
-        \label{subfig:fad_model}
-    \end{subfigure}
-    \hfill
-    \begin{subfigure}[t]{0.6\textwidth}
-        \centering
-        \includegraphics[width=\linewidth]{figures/superdiffusion/model/lambda_vs_q_fit.pdf}
-        \caption{Model: spectrum $\lambda(q)$}
-        \label{subfig:scaling_order_model}
-    \end{subfigure}
-    \caption{\textbf{Monoscaling superdiffusion in human visual search trajectories and in the model.}
-    Time-averaged fractional absolute displacements $\langle \|\Delta\mathbf{x}\|^{q}\rangle$, which generalise the mean squared displacement to a spectrum of orders $q$, with small $q$ emphasising small fixational displacements and large $q$ emphasising saccades. The top row shows binocular-averaged gaze data, with moments ensemble-averaged over all 22 subjects of \textcite{naher_primate_saccades} (approximately 10,000 s of data; exact sample size to be updated). The bottom row shows the same analysis applied to trajectories simulated from the model of \cref{chap:a_unifying_model}. \textbf{(a,c)}~Moments rescaled as $M_q(\Delta t) \propto \langle\|\Delta\mathbf{x}\|^{q}\rangle^{1/q}$ and normalised to $M_q(1~\text{ms}) = 1$, for 30 values of $q$ from $0.1$ to $3.0$. In log--log space the slope of each curve is $\lambda(q)/q$. \textbf{(b,d)}~Scaling exponents $\lambda(q)$ from power-law fits to the curves on the left, up to $\Delta t = \qty{30}{\ms}$. For the data, the relation is linear, $\lambda(q) = (0.893 \pm 0.006)\,q$ with $R^2 = 0.999$, so all moments share a single scaling exponent. This corresponds to a Lévy stability index $\alpha = q/\lambda(q) = 1.120 \pm 0.007$, well below the Brownian value $\alpha = 2$, indicating strong superdiffusion from fixational scales to saccades. For the model, the fit gives $\lambda(q) = (\,0.917 \pm 0.004\,)\,q$, i.e.\ $\alpha = 1.091 \pm 0.005$.} 
-    \label{fig:search_superdiffusion}
-\end{figure}
+\cref{subfig:fad_data} shows the rescaled moments $M_q(\Delta t)$ for the human eye-tracking data. Under this rescaling, the slope of each curve in log--log space is $\lambda(q)/q$. Monoscaling therefore predicts that these curves share a single slope across the whole spectrum of $q$, with $\frac{\lambda(q)}{q} = 1/\alpha$. For comparison, Brownian motion ($\alpha = 2$) has slope $1/2$ and ballistic motion has slope $1$ across the entire spectrum $q$. The monoscaling exponent is found by performing a linear regression to our spectrum $\lambda(q)$. \cref{subfig:scaling_order_data} shows these fitted exponents $\lambda(q)$ against $q$. The linear fit is good, with $\lambda(q) = (0.893 \pm 0.006)\,q$ and $R^2 = 0.999$, across the whole considered range $0.1 \le q \le 3.0$. This gives a Lévy index $\alpha = q/\lambda(q) = 1.120 \pm 0.008$, which is well below the Brownian value of $2$ and so indicates strong superdiffusion. Because the spectrum is well described by a linear regression, there is no crossover in scaling between the low-$q$ moments that probe fixational motion and the high-$q$ moments that probe saccades. A single exponent describes both, validating our unifying model across both scales of study in gaze dynamics, derived naturally from FNS dynamics.
 
 \subsubsection*{Implications of monoscaling superdiffusion}
 The most important implication of this particular superdiffusion results is that the strong monoscaling of visual search trajectories with Lévy index $\alpha = 1.120$ is robustly multiscale. The robust linear scaling of $\lambda(q)=\frac{q}{\alpha}=\frac{q}{1.120}$ across a spectrum of $q$-values $0 < q < 3$ is important, as it presents an identical process driving both fixational eye movements --- including tremor, drifts, and microsaccades --- with small relative values of $\| \Delta \textbf{x}\|$ emphasised with low values of $q$, as well as large nonlocal saccades with large relative values of $\| \Delta \textbf{x} \|$, emphasised through large values of $q$. Importantly, this validates our construction of a continuous-time unified model of eye movements, unified across all spatiotemporal scales of visual search.
