@@ -13,22 +13,8 @@ where we ignore the stochastic noise driving this equation to only consider the 
     \frac{d\textbf{p}}{dt} &= -\beta c_{\alpha} \frac{\textbf{x}}{\sigma_{\text{fix}}^2} 
 \end{aligned}
 \end{equation}
-where the ODE describing $\textbf{x}$ can be differentiated, and $\frac{d\textbf{p}}{dt}$ substituted to give one second order ODE for $\textbf{x}$
-\begin{equation}
-    \frac{d^2 \textbf{x}}{dt^2} = -\frac{\gamma c_{\alpha}}{\sigma_{\text{fix}}^2} \frac{d\textbf{x}}{dt} - \frac{\beta^2 c_{\alpha}}{\sigma_{\text{fix}}^2} \textbf{x}
-\end{equation}
-Solving the characteristic equation associated with this ODE, $\lambda^2 + \frac{\gamma c_{\alpha}}{\sigma_{\text{fix}}^2} \lambda + \frac{\beta^2 c_{\alpha}}{\sigma_{\text{fix}}^2} = 0$, we have
-\begin{equation}
-    \lambda = \frac{1}{2}\left( 
-    -\frac{\gamma c_{\alpha}}{\sigma_{\text{fix}}^2} 
-    \pm \sqrt{\frac{\gamma^2 c_{\alpha}^2}{\sigma_{\text{fix}}^4} - 4\frac{\beta^2 c_{\alpha}}{\sigma_{\text{fix}}^2}} \right)
-\end{equation}
-Assuming an underdamped regime where the discriminant is negative, the resonant frequency $\omega$ of the fixational dynamics corresponds to the' imaginary part of the eigenvalues
+Assuming an underdamped regime where the system is periodic, corresponding to parameter range $\beta > \gamma \sqrt{c_{\alpha}} / \sigma_{\text{fix}}$, the resonant ordinary frequency $f = 2 \pi \omega$ is given by
 \begin{equation}\label{eq:resonant_frequency}
-    \omega = \sqrt{\frac{\beta^2 c_{\alpha}}{\sigma_{\text{fix}}^2} - \frac{\gamma^2 c_{\alpha}^2}{4\sigma_{\text{fix}}^4}}
-\end{equation}
-which yields ordinary frequency
-\begin{equation}
     f = \frac{1}{2 \pi \sigma_{\text{fix}}} \sqrt{\beta^2 c_{\alpha} - \frac{\gamma^2 c_{\alpha}^2}{4\sigma_{\text{fix}}^2}}
 \end{equation}
 % The parameters $\beta$ and $\gamma$ drive the high-frequency dynamics observed during fixation intervals. $\beta = 1000$ was explicitly tuned to match the empirical microtremor fixation frequency at 65 Hz with a standard deviation of 3 pixels. Correspondingly, $\gamma = 1000$ was selected to be of a similar order of magnitude to $\beta$ to appropriately dampen these strong 65 Hz oscillations. The interaction of these parameters successfully replicates a prominent gamma-band peak centred around 65 Hz, matching empirical eye velocity power spectral density during stable fixations.
