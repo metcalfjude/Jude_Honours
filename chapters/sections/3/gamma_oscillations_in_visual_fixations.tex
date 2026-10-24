@@ -1,5 +1,5 @@
 \section{Gamma oscillations during visual fixation}\label{sec:gamma_oscillations}
-We now look to verifying the short-time and fine spatial scales of our model predictions, specifically of those high frequencies found in local sampling of potential modes in \cref{sec:local_harmonic_oscillations}. Typically short-time gaze dynamics are divided into microsaccades, low-frequency linear drift, and high frequency ocular tremor \cite{rucci_control_2015}. There is increasing evidence that microsaccades---which is the name given to jumps in gaze during fixaton---are driven by the same statistics and process as regular (called macro-) saccades. This is predicted by our model, where saccades on all scales are manifestations of the Lévy flight jump process; a full analysis of the superdiffusion of such saccades on the micro- and macro-scales is covered in the next section (\cref{sec:search_superdiffusion}). Linear drifts in fixation have been found to be important in gathering information. An account of low-frequency linear drift easily fits into the model presented here, for instance as steep peak in the dynamical kernel or a simple drift in the potential landscape, producing a self-avoiding walk as described in \cite{engbert_integrated_2011} and described in \cref{tab:search_models_colored}. But our focus here is that of the high frequency signal called microtremor often found in eye movements and misattributed to noise \cite{rucci_control_2015, rucci_miniature_2007, rucci_temporal_2018, rucci_unsteady_2015, bowers_effects_2019, roberts_fixational_2013, wu_fixational_2024, greschner_retinal_2002, graham_ocular_2023}, but which we predict to be important to the function of a visual search.
+We now look to verifying the short-time and fine spatial scales of our model predictions, specifically of those high frequencies found in local sampling of potential modes in \cref{sec:local_harmonic_oscillations}. Typically short-time gaze dynamics are divided into microsaccades, low-frequency linear drift, and high frequency ocular tremor \cite{rucci_control_2015}. There is increasing evidence that microsaccades---which is the name given to jumps in gaze during fixaton---are driven by the same statistics and process as regular (called macro-) saccades. This is predicted by our model, where saccades on all scales are manifestations of the Lévy flight jump process; a full analysis of the superdiffusion of such saccades on the micro- and macro-scales is covered in the next section (\cref{sec:search_superdiffusion}). Linear drifts in fixation have been found to be important in gathering information. An account of low-frequency linear drift easily fits into the model presented here, for instance as steep peak in the dynamical kernel or a simple drift in the potential landscape, producing a self-avoiding walk as described in \cite{engbert_integrated_2011} and described in \cref{tab:search_models_colored}. But our focus here is that of the high frequency signal called microtremor found in eye movements \cite{graham_ocular_2023, higgins_frequency_1953, bolger_dominant_1999} and misattributed to noise \cite{roberts_fixational_2013, greschner_retinal_2002, graham_ocular_2023}, but which we predict to be important to the function of a visual search.
 
 The current study is the first to make a well-motivated prediction concerning high-frequency ocular microtremor as a gamma-scale sampling pattern linked to deeper neural activity. Identifying ocular tremor as high frequency gamma-scale visual sampling is a novel and useful approach in understanding and quantifying perceptual sampling. This is supported by recent evidence that ocular microtremor may have a shared origin for both eyes in the brainstem \cite{graham_ocular_2023}, and coarse results that neural disorders such as Parkinson's' disease effect tremor frequency across all tasks \cite{kaski_ocular_2017}.
 \subsection{Previous treatment as ocular microtremor}
@@ -28,16 +28,15 @@ The analysis pipeline is as follows. We apply a fourth-order Butterworth low-pas
 	\begin{subfigure}[T]{0.48\textwidth}
 		\centering 
 		\includegraphics[width=\linewidth]{figures/fixation_psd_plot.pdf}
-		\caption{\textbf{Data power spectrum with a peak at $\mathbf{57.0}$~Hz}}
 		\label{fig:rate-RCRI}
 	\end{subfigure}
 	\begin{subfigure}[T]{0.48\textwidth}
 		\centering
 		\includegraphics[width=\linewidth]{figures/Averaged_PSD_Plot.pdf}
-		\caption{\textbf{Model power spectrum with a peak at $\mathbf{78.1}$~Hz}}
 		\label{fig:rate-RCRI}
 	\end{subfigure}
     \label{fig:fixation_psd}
+    \caption{}
 \end{figure}
 
 \begin{figure}[htbp]

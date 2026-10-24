@@ -1,9 +1,6 @@
 \section{Model setup}\label{sec:model_setup}
-
-Having established the individual spatiotemporal signatures of FNS dynamics, we now define a standard computational framework to test these dynamics against the human behavioral data presented in \cref{chap:empirical_validations}. 
-
 \subsubsection*{Mathematical formulation of gaze dynamics}
-The dynamical model of gaze dynamics, inspired by and developed from the FNS theory of neural dynamics, models eye movement trajectories as an underdamped Langevin system driven by an adaptive potential landscape $V_t(\cdot)$ by a kernel of information gathering $k(\cdot)$. Let $\mathbf{x}_t$ denote the two-dimensional position of visual attention, $\mathbf{p}_t$ a generalised auxiliary variable analogous to momentum and encodes short-scale memory effects, $\beta \geq 0$ the coupling strength parameter between $\mathbf{p}_t$ and $\mathbf{x}_t$, $\gamma > 0$ the noise strength parameter as in the standard Langevin system \ref{eq:langevin}, and $0 < \alpha \le 2$ the Lévy tail exponent which defines the heaviness of tails from which noise is drawn, and equivalently the strength of superdiffusion as in \crefrange{subsec:anom_diff}{subsec:levy_motion}. The driving noise process $dL_t^{\alpha}$ represents independent symmetric $\alpha$-stable ($\mathcal{S}\alpha\mathcal{S}$) Lévy fluctuations.
+The dynamical model of gaze dynamics, inspired by and developed from the FNS theory of neural dynamics (see \cref{subsec:neur_sampling}, \cite{qi_fractional_2022}), models eye movement trajectories as an overdamped Langevin system driven by an adaptive potential landscape $V_t(\cdot)$ by a kernel of information gathering $k(\cdot)$. Let $\mathbf{x}_t$ denote the two-dimensional position of visual attention, $\mathbf{p}_t$ a generalised auxiliary variable analogous to momentum and encodes short-scale memory effects, $\beta \geq 0$ the coupling strength parameter between $\mathbf{p}_t$ and $\mathbf{x}_t$, $\gamma > 0$ the noise strength parameter as in the standard Langevin system \ref{eq:langevin}, and $0 < \alpha \le 2$ the Lévy tail exponent which defines the heaviness of tails from which noise is drawn, and equivalently the strength of superdiffusion as in \crefrange{subsec:anom_diff}{subsec:levy_motion}. The driving noise process $dL_t^{\alpha}$ represents independent symmetric $\alpha$-stable ($\mathcal{S}\alpha\mathcal{S}$) Lévy fluctuations.
 
 A deterministic drift $b_\alpha(\mathbf{x}_t)$ drives the system driven by Lévy noise toward an invariant target distribution $\pi(\mathbf{x})$ over long times. As derived in \cite{qi_fractional_2022}, the exact non-local drift for arbitrary $0 < \alpha < 2$ is formulated in terms of the Riesz $(\alpha - 2)$--fractional derivative $\mathcal{D}^{\alpha - 2}_{\mathbf{x}}$:
 \begin{equation}\label{eq:full_drift}
@@ -38,8 +35,8 @@ The baseline parameters for standard simulation runs are calibrated as follows:
 \begin{itemize}
 	\item $\alpha = 1.2$: Captures the characteristic search superdiffusion observed in \cref{sec:search_superdiffusion} while maintaining numerical stability.
 	\item $\sigma_{k} = 80~\unit{\px}$: Defines an adaptive spatial acuity kernel by the Gaussian $k(\mathbf{x}) = \exp \left( -\frac{\|\mathbf{x}\|^2}{2\sigma_{k}^2} \right)$. This matches the radial decay scale of human visual acuity ($\approx \qty{2.5}{\degree}$, corresponding to 87.2~\unit{\px} at a \qty{50}{\cm} viewing distance with 4~\unit{\px\per\mm} density).
-	\item $\tau = 2 \times 10^{-4}~\unit{\second^{-1}}$: Set to yield theta-rhythmic saccadic transitions, as derived in \cref{eq:theta_rhythm} and evaluated in \cref{sec:theta_rhythmicity_of_saccades}. (Note: across simulations, this produces an average ISI of 360~ms, mirroring the empirical saccade rate of 3.53~Hz / 280~ms average ISI).
-	\item $\beta = 1000~\unit{\px~\second^{-1}}$ and $\gamma = 1000~\unit{\px^2~\second^{-1}}$: Ensures recovery of gamma-rhythmic harmonic oscillations within the underdamped regime for \qty{3}{\px} wells (\cref{sec:gamma_oscillations}).
+	\item $\tau = 2 \times 10^{-4}~\unit{\second}$: Set to yield theta-rhythmic saccadic transitions, as derived in \cref{eq:theta_rhythm} and evaluated in \cref{sec:theta_rhythmicity_of_saccades}. (Note: across simulations, this produces an average ISI of 360~ms, mirroring the empirical saccade rate of 3.53~Hz / 280~ms average ISI).
+	\item $\beta = 1000~\unit{\px~\second^{-1}}$ and $\gamma = 1000~\unit{\px^{\alpha}~\second^{-1}}$: Ensures recovery of gamma-rhythmic harmonic oscillations within the underdamped regime for \qty{3}{\px} wells (\cref{sec:gamma_oscillations}).
 \end{itemize}
 
 \begin{figure}[htbp]
@@ -47,16 +44,14 @@ The baseline parameters for standard simulation runs are calibrated as follows:
 	\begin{subfigure}[T]{0.45\textwidth}
 		\centering
 		\includegraphics[width=\linewidth]{figures/FNS_sim.png}
-		\caption{}
 		\label{subfig:}
 	\end{subfigure}
 	\hfill
 	\begin{subfigure}[T]{0.45\textwidth}
 		\centering
 		\includegraphics[width=\linewidth]{figures/index_8.png}
-		\caption{}
 		\label{subfig:gamma_fits}
 	\end{subfigure}
-	\caption{}
+	\caption{\textbf{A comparison of the modelled search task with an example gaze trajectory from a real human trial.}}
 	\label{fig:trajectories}
 \end{figure}
