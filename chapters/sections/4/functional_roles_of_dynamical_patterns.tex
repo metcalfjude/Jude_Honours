@@ -1,247 +1,142 @@
 \section{Functional roles of dynamical patterns}\label{sec:functional_roles_of_dynamical_patterns}
 
-The dynamics studied in this thesis are characterised by three distinct spatiotemporal signatures: gamma-band oscillations, theta-scale rhythmicity, and superdiffusive spatial trajectories. The framework of \cref{chap:a_unifying_model}, constructs a biologically-motivated model to produce these signatures through  an abstract search task. In \cref{chap:empirical_validations} we found that the same dynamics have been found to be important in studying real human gaze trajectories, especially during realistic search tasks. In this section we make use of the theoretical foundations of this model as a sampling theory, and identify the functional advantages of each pattern in an abstract sampling process which the brain would be trained to complete: local exploitation in gamma oscillations, temporal organisation in theta rhythmicity, and global exploration through Lévy $\alpha$-superdiffusion. To make these roles precise, we define a set of information-theoretic metrics for search efficiency and, for each metric in turn, describe how each of the three patterns effects it.
+The dynamics studied in this thesis are characterised by three distinct spatiotemporal signatures: theta-scale rhythmicity, gamma-scale local oscillations, and superdiffusive spatial trajectories. The framework of \cref{chap:a_unifying_model}, constructs a biologically-motivated model to produce these signatures through their emergent physical dynamics. Throughout \cref{chap:empirical_validations} we have found that the same dynamics have been found to be important in studying real human gaze trajectories, especially during realistic search tasks. In this section we make use of the theoretical foundations of this model as a sampling theory, and identify the functional advantages of each pattern in an abstract sampling process within neural computation. To quantify the role each signature provides, we define a set of information-theoretic metrics for search efficiency and, for each metric in turn, describe how each of the three patterns effects it.
+\subsection*{Information gain}\label{subsec:information_gain}
+When considering the efficiency advantages of strategic sampling in a visual search task, the central quantity under study is the information gain, $\mathrm{IG}(t)$. To quantify informational across an abstract search landscape, we take inspiration from Bayesian inference and sampling methods. In particular, the link between the explored dynamic potential to a target-belief distribution in a search task in \cref{eq:boltzmann-gibbs} provides a natural place to define information gained in the target search.% The adaptive dynamics of our model when viewed as a sampling  closely resemble well-tempered metadynamics in Markov chain Monte Carlo (MCMC) sampling \cite{tiwary_time-independent_2015}. Similar techniques have been used to model visual search in discrete time by \textcite{bujia_modeling_2022}, where the equivalent target distribution is the likelihood distribution for a search goal, and information is tracked only at the goal position. In \cref{sec:dynamical-information_adaptation} we expanded and unified these approaches by analysing a continuous-time dynamical-information kernel. By tracking the posterior target distribution after kernel deposition at every location in the visual scene, we model global information acquisition across an evolving landscape of belief.
 
-The three patterns are controlled by distinct parts of the model:
-\begin{itemize}
-	\item \textbf{Gamma oscillations} arise from the memory--momentum term $p_t$ (strength $\beta$) and the $\alpha$-L\'evy noise $dL_t^{\alpha}$ within a highly localised potential well. They are analogous to the gamma oscillations found throughout the brain in almost every computational task, and to high-frequency ocular microtremor in gaze.
-	\item \textbf{Theta rhythmicity} is the regular, theta-scale timing of transitions between potential wells, tied to the rate of information acquisition through the informative timescale $\tau$ (\cref{eq:theta_rhythm}). For motion driven by L\'evy or Brownian noise alone, transition intervals are instead exponentially distributed according to a Poisson point process, as follows from the L\'evy--It\^o decomposition theorem (\cref{subsec:levy_motion}).
-	\item \textbf{Superdiffusion} is governed by the stability index $\alpha$ and sets the spatial scaling of global exploration. Superdiffusive paths are thought to be optimal for exploring sparse unknown landscapes under the L\'evy foraging hypothesis (\cref{subsubsec:anomalous_superdiffusion}).
-\end{itemize}
-
-%% ====================================================================
-\subsection{Information gain}\label{subsec:information_gain}
-When considering the efficiency advantages of strategic sampling in a visual search task, the central quantity under study is the information gain, $IG(t)$. To quantify informational search efficiency across an abstract search landscape, we take inspiration from Bayesian inference and sampling methods. In particular, the adaptive dynamics of our sampling model closely resemble well-tempered metadynamics in Markov chain Monte Carlo (MCMC) sampling \cite{tiwary_time-independent_2015}. Similar techniques have been used to model visual search in discrete time by \textcite{bujia_modeling_2022}, where the equivalent target distribution is the likelihood distribution for a search goal, and information is tracked only at the goal position. In \cref{sec:dynamical-information_adaptation} we expanded and unified these approaches by analysing a continuous-time dynamical-information kernel. By tracking the posterior target distribution after kernel deposition at every location in the visual scene, we model global information acquisition across an evolving landscape of belief.
-
-Given a search through a probabilistic landscape for high-probability modes, the information extracted is proportional to the change in entropy of the target distribution. Since we study updates to an effective belief distribution, we use the language and tools of Bayesian inference directly. The initial pre-search belief distribution, $\pi_0(\mathbf{x})$, is defined through the saliency-potential landscape $V_0(\mathbf{x})$ by Boltzmann--Gibbs statistics,
-\begin{equation}
-	\pi_0(\mathbf{x}) = \frac{\exp\{-V_0(\mathbf{x})\}}{\int_{\mathbf{x}'} \exp\{-V_0(\mathbf{x}')\} \, d\mathbf{x}'}.
-\end{equation}
-As the search progresses, the potential updates in continuous time to encode learned information, through an accumulated kernel over time $t$,
-\begin{equation}
-	V_t(\mathbf{x}) = V_0(\mathbf{x}) + \int_0^t k(\mathbf{x}_{t'}) \, \frac{dt'}{\tau}.
-\end{equation}
-This adapted potential defines the posterior belief distribution, the updated target likelihood landscape at time $t$,
-\begin{equation}
-	\pi_t(\mathbf{x}) = \frac{\exp\{-V_t(\mathbf{x})\}}{\int_{\mathbf{x}'} \exp\{-V_t(\mathbf{x}')\} \, d\mathbf{x}'}.
-\end{equation}
-A natural first step in comparing information gathering through time is the cross-entropy of the posterior to the prior,
+A natural first step in comparing information gathered about a target position through time across a target is the cross-entropy of the posterior to the prior,
 \begin{equation}
 	H(\pi_t, \pi_0) = -\int \pi_t(\mathbf{x}) \log \pi_0(\mathbf{x}) \, d\mathbf{x}.
 \end{equation}
-However, cross-entropy alone is of limited utility, as it conflates the internal concentration of belief within the posterior (its self-entropy, $H(\pi_t)$) with the net information gained relative to the prior. To decouple these contributions we subtract the posterior entropy to obtain the Kullback--Leibler (KL) divergence $D_{\mathrm{KL}}(\pi_t \parallel \pi_0)$, which gives the formal definition of information gain up to time $t$:
+however, this cross-entropy alone is of limited utility. Cross entropy will conflate the internal concentration of belief within the posterior (its self-entropy, $H(\pi_t)$) with the net information gained relative to the prior. To decouple these contributions we subtract the posterior entropy to obtain the Kullback--Leibler (KL) divergence $D_{\mathrm{KL}}(\pi_t \parallel \pi_0)$, which gives the formal definition of information gain up to time $t$:
 \begin{align}
 	IG(t) &= H(\pi_t, \pi_0) - H(\pi_t) \nonumber \\
 	&= -\int \pi_t(\mathbf{x}) \log \pi_0(\mathbf{x}) \, d\mathbf{x} + \int \pi_t(\mathbf{x}) \log \pi_t(\mathbf{x}) \, d\mathbf{x} \nonumber \\
 	&= \int \pi_t(\mathbf{x}) \log \left( \frac{\pi_t(\mathbf{x})}{\pi_0(\mathbf{x})} \right) d\mathbf{x} \nonumber \\
 	&\equiv D_{\mathrm{KL}}(\pi_t \parallel \pi_0). \label{eq:information_gain}
 \end{align}
-The KL divergence is non-negative and asymmetric. In the context of an abstract sampling model, non-negativity reflects the fact that any spatial update from $\pi_0$ represents accumulated evidence, though not necessarily optimal search efficiency. A weak kernel, a slow informative timescale $\tau$, or deposition in low-likelihood areas alters the landscape only marginally and results in slower growth in $IG$. The information content of the search trajectory is therefore entirely captured by $IG$, which quantifies the global information acquired as the observer's belief landscape evolves from $\pi_0$ to $\pi_t$. The metrics in the following subsections summarise different aspects of the curve $IG(t)$.
-
-Since $\tau$ sets the timescale of information gathering, time-dependent metrics such as $IV$ and $FPT$ are trivially improved by decreasing $\tau$. When testing the effect of a dynamical pattern, particularly theta-rhythmic transitions, comparisons must therefore be made at fixed $\tau$ or through dimensionless metrics.
-
-%% ====================================================================
-\subsection{Information velocity}\label{subsec:information_velocity}
-The information velocity, $IV = dIG/dt$, is the first derivative of the information gain. Comparing its averaged value at the same informative timescale $\tau$ measures the quality of information gathered by different strategies. A strategy that targets high-likelihood areas, and drives transitions sensitive to decreases in the level of likelihood, will have high average $IV_{\mathrm{mean}}$ and $IV_{\mathrm{med}}$.
-
-\paragraph{Gamma oscillations.} Rapid local decorrelation means kernel is deposited across the well at many independent locations, so we expect stronger oscillations (larger $\beta$) to increase how quickly information is extracted from a high-likelihood region (\cref{fig:iv_metrics}a,b).
-% TODO: state the observed trend of IV_mean against beta and in the heatmap.
-
-\paragraph{Theta rhythmicity.} Rhythmic transitions end each dwell at a point linked to information acquisition, so time is not wasted in depleted wells. At fixed $\tau$ this is expected to raise the average information velocity relative to Poisson-distributed transitions.
-% TODO: add the observed IV comparison between theta-rhythmic and Poisson transitions at fixed tau.
-
-\paragraph{Superdiffusion.} Long jumps place the walker in new high-likelihood regions where kernel deposition is most informative, which is expected to raise the mean $IV$ relative to purely local diffusion (\cref{fig:iv_metrics}c).
-% TODO: state the observed trend of mean IV against alpha at beta=1000.
-
+where important properties of the KL divergence is that it is non-negative and asymmetric. In the context of an abstract sampling model, non-negativity reflects the fact that any spatial update from $\pi_0$ represents accumulated evidence, though not necessarily optimal search efficiency. A weak kernel, a slow informative timescale $\tau$, or deposition in low-likelihood areas alters the landscape only marginally and results in slower growth in $\mathrm{IG}$. The information content of the search trajectory is therefore entirely captured by $\mathrm{IG}$, which quantifies the global information acquired as the observer's belief landscape evolves from $\pi_0$ to $\pi_t$. The metrics in the following subsections summarise different aspects of the curve $\mathrm{IG}(t)$.
+% Three-panel figure: #1,#2,#3 = panel files, #4 = caption, #5 = label
+\newcommand{\threepanel}[5]{%
 \begin{figure}[htbp]
-	\centering
-	\begin{subfigure}[b]{0.48\textwidth}
-		\centering
-		\includegraphics[width=\linewidth]{figures/information_metrics/median_mean_info_velocity_alpha1p2_vs_beta.pdf}
-		\caption{}\label{fig:iv_beta}
-	\end{subfigure}
-	\hfill
-	\begin{subfigure}[b]{0.48\textwidth}
-		\centering
-		\includegraphics[width=\linewidth]{figures/information_metrics/median_mean_info_velocity_heatmap.pdf}
-		\caption{}\label{fig:iv_heatmap}
-	\end{subfigure}
-	
-	\vspace{1em}
-	\begin{subfigure}[b]{0.48\textwidth}
-		\centering
-		\includegraphics[width=\linewidth]{figures/information_metrics/mean_mean_info_velocity_beta1000_vs_alpha.pdf}
-		\caption{}\label{fig:iv_alpha}
-	\end{subfigure}
-	\caption{\textbf{Information velocity.} (a) Median mean $IV$ against the momentum strength $\beta$ at $\alpha = 1.2$. (b) Heatmap of median mean $IV$. % TODO: state heatmap axes.
-		(c) Mean $IV$ against the stability index $\alpha$ at $\beta = 1000$.}
-	\label{fig:iv_metrics}
-\end{figure}
+  \centering
+  \begin{subfigure}[b]{0.32\textwidth}\centering
+    \includegraphics[width=\linewidth]{#1}\caption{}\label{#5a}
+  \end{subfigure}\hfill
+  \begin{subfigure}[b]{0.32\textwidth}\centering
+    \includegraphics[width=\linewidth]{#2}\caption{}\label{#5b}
+  \end{subfigure}\hfill
+  \begin{subfigure}[b]{0.32\textwidth}\centering
+    \includegraphics[width=\linewidth]{#3}\caption{}\label{#5c}
+  \end{subfigure}
+  \caption{#4}\label{#5}
+\end{figure}}
 
-%% ====================================================================
-\subsection{First passage time}\label{subsec:first_passage_time}
-Perhaps the clearest metric of search efficiency is the speed of completing a task. In our system this is the duration of each trial, the first passage time (FPT). We can derive an expected FPT from the theta-scale rate of saccades (\cref{eq:theta_rhythm} in \cref{sec:dynamical-information_adaptation}) and the number of target points in the visual scene relative to the total. For $K$ targets among $N$ points, the probability of reaching no target after $n$ saccades is the hypergeometric distribution evaluated at zero,
-\begin{equation} \label{eq:hypergeo}
-	p_n(0) = \frac{\binom{K}{0}\binom{N-K}{n}}{\binom{N}{n}} = \frac{(N-K)!\,(N-n)!}{(N-K-n)!\,N!}.
+% ---- text ----
+\subsection{Results}
+
+\subsubsection*{Metrics and comparison conditions}\label{subsec:metrics}
+We collected statistics on an ensemble of searches on the computational setup described in \cref{sec:model_setup}, with 200 trials for each parameter set examined, across the entire swept range of parameters. We considered two sweeps: $\alpha-\beta$ sweep for $\alpha$ incremented from $1.1$ to $2.0$ in increments of $0.05$ and $\beta$ from $0$ to $1200$ in increments of $100$, and a $\alpha-\theta$ sweep with the same $\alpha$ range, and $\theta$ varied between $5 \times 10^{-5}$ and $1 \times 10^{-3}$ in increments of $5 \times 10^{-5}$
+
+The most important three metrics that capture complementary aspects of performance: the speed of completion as first passage time, the speed of information gathered as information velocity, and the temporal profile of information gain as a shape exponent. The first passage time ($\mathrm{FPT}$) is the time from trial onset to the first fixation on a target, perhaps the clearest metric of success, with units of seconds. The information velocity $\mathrm{IV} = \langle\mathrm{d}\mathrm{IG}/\mathrm{d}t \rangle$ is the mean value of the rate of information gain, with units of inverse seconds. The shape exponent $\mathrm{SE}$ describes the profile of the $\mathrm{IG}$ curve: we normalised time and $\mathrm{IG}$ to $[0,1]$, computed the area $A$ under the normalised curve, and defined $\mathrm{SE} = 1/A - 1$. This will fit the monotonic information curve the exponent of the power law $\mathrm{IG} \propto t^{\mathrm{SE}}$ with equal area. Thus $\mathrm{SE} = 1$ is accumulation at a constant rate, $\mathrm{SE}< 1$ is decelerating information gain, and $\mathrm{SE}>1$ would be an accelerating rate of information gain.
+
+As an analytical reference for $\mathrm{FPT}$, we considered a searcher that fixates points uniformly at random without replacement, one per theta interval. For $K$ targets among $N$ points, the expected number of fixations to the first target is $(N+1)/(K+1)$\footnote{This is found by considering the expected number of failures in sampling from a hypergeometric distribution with total population $N$ and success population $K$. See for instance \cite{Ahlgren2014-gt}}, and so for $\tau = 2\times 10^{-4}$
+\begin{equation}\label{eq:fpt_baseline}
+  \mathbb{E}[\mathrm{FPT}_0] = t_\theta \, \frac{N+1}{K+1} = \qty{6.0919}{\second}
 \end{equation}
-The expected number of saccades $\mathbb{E}[n]$ is the $n$ for which \cref{eq:hypergeo} first falls below $0.5$, and the expected first passage time is $\mathbb{E}[\mathrm{FPT}] = t_{\theta}\,\mathbb{E}[n]$. For our standard parameters and experiment, defined in \cref{sec:model_setup}, this gives
-\begin{align}
-	\mathbb{E}[\mathrm{FPT}] &= t_{\theta} \times \mathbb{E}_{N=256,K=5}[n] \nonumber \\
-	&= 0.1422 \times 94 \nonumber \\
-	&= 13.36 \ \mathrm{s}. \label{eq:fpt_expected}
-\end{align}
-This calculation assumes that each transition is independent and drawn from a stationary distribution with mean $t_{\theta}$ across the search task. The true dynamics of the system are therefore expected to yield an averaged FPT that depends on the system parameters, and \cref{eq:fpt_expected} serves as a baseline against which the effect of each pattern is assessed.
+% For N=256, K=5, t_theta=0.1422 s this evaluates to about 6.1 s -- confirm parameters.
+where $t_\theta$ is the mean saccade interval $t_{\theta} =  \qty{142.22}{\second}$. This reference ignores saliency guidance, momentum and spatial structure, and is drawn as a dashed line in the FPT panels. Two further metrics, the Gini coefficient of binned information gain and the information--entropy gradient $\mathrm{IG}_{\mathrm{H}}$, were also computed and are reported in \cref{app:supp_metrics}.
 
-\paragraph{Gamma oscillations.} The memory--momentum term $\beta$ keeps the sampler responsive to real-time changes in the saliency landscape as information is received from the scene. This responsiveness is not captured by the baseline, and can shorten the time to find a target.
-% TODO: add the observed FPT dependence on beta, or remove if not computed.
-
-\paragraph{Theta rhythmicity.} The baseline uses the theta rate $t_\theta$ directly, so theta rhythmicity sets the mean waiting time per saccade. Regular intervals with the same mean are expected to narrow the spread of first passage times compared with exponentially distributed intervals.
-% TODO: add the observed FPT comparison between rhythmic and Poisson transitions at fixed tau.
-
-\paragraph{Superdiffusion.} A superdiffusive walker has access to the entire scene, and may explore nearby fixation points before migrating to far-displaced areas. This breaks the independence assumed in the baseline, so the mean FPT is expected to depend on $\alpha$ through how efficiently the walker reaches unvisited targets (\cref{fig:fpt_alpha}).
-% TODO: state the observed minimum / trend of mean FPT against alpha.
-
-\begin{figure}[htbp]
-	\centering
-	\includegraphics[width=0.48\linewidth]{figures/information_metrics/mean_fpt_vs_alpha.pdf}
-	\caption{\textbf{First passage time.} Mean FPT against the stability index $\alpha$.}
-	\label{fig:fpt_alpha}
-\end{figure}
-
-%% ====================================================================
-\subsection{Shape parameter}\label{subsec:shape_parameter}
-While the preceding metrics depend explicitly on the search timescale, we can evaluate the fundamental efficiency of a sampling process by making it dimensionless. By normalising each trial so that both time and information content range from $0$ to $1$, we can examine the shape of the monotonic accumulation curve $IG(t)$ independently of absolute time. Statistically, this is captured by the area under the normalised curve, which can be transformed into an effective power-law exponent for the growth of information gain.
-
-\paragraph{Gamma oscillations.} Gamma activity acts at short times, so its influence on the dimensionless curve is expected to appear in how front-loaded information gain is within each visited well.
-% TODO: add result, or remove if the shape parameter was not computed against beta.
-
-\paragraph{Theta rhythmicity.} Because the shape parameter is dimensionless, it separates the effect of rhythmic transitions from the trivial dependence on $\tau$. Regular transitions avoid long dwells in depleted wells, which should keep the normalised accumulation curve closer to linear rather than saturating early.
-% TODO: add observed exponents for rhythmic versus Poisson transitions.
-
-\paragraph{Superdiffusion.} Trapping in a depleted well causes information gain to plateau early, giving a strongly concave normalised curve. By escaping such wells, superdiffusion is expected to sustain information gain later in the trial and so raise the effective exponent (\cref{fig:shape_alpha}).
-% TODO: state the observed trend of the shape exponent against alpha.
-
-\begin{figure}[htbp]
-	\centering
-	\includegraphics[width=0.48\linewidth]{figures/information_metrics/mean_exponent_shape_vs_alpha.pdf}
-	\caption{\textbf{Shape parameter.} Mean shape exponent of the normalised information-gain curve against the stability index $\alpha$.}
-	\label{fig:shape_alpha}
-\end{figure}
-
-%% ====================================================================
-\subsection{Gini coefficient}\label{subsec:gini_coefficient}
-To measure the inequality in the information gained, we bin the trial into time windows longer than the gamma oscillation and compute the Gini coefficient of the information gained across bins. A low value indicates that information is acquired evenly through the search, while a high value indicates that it is concentrated in a few periods.
-
-\paragraph{Gamma oscillations.} Since the bins are longer than the gamma period, the oscillations themselves are not resolved. The metric instead tests whether stronger local sampling spreads information acquisition more evenly across successive windows (\cref{fig:gini_beta}).
-% TODO: state the observed trend of the Gini coefficient against beta.
-
-\paragraph{Theta rhythmicity.} This is the metric most directly tied to theta organisation. Because rhythmic transitions end each dwell at a point linked to information acquisition, rather than at a random time, we expect a more even distribution of information across time windows, and hence a lower Gini coefficient than for the Poisson case.
-% TODO: add the observed Gini comparison between theta-rhythmic and Poisson transitions.
-
-\paragraph{Superdiffusion.} Long jumps may concentrate information in bursts when a new mode is reached, which would raise the Gini coefficient for small $\alpha$.
-% TODO: add result, or remove if not computed against alpha.
-
-\begin{figure}[htbp]
-	\centering
-	\includegraphics[width=0.48\linewidth]{figures/information_metrics/median_gini_vs_beta.pdf}
-	\caption{\textbf{Gini coefficient.} Median Gini coefficient of binned information gain against the momentum strength $\beta$.}
-	\label{fig:gini_beta}
-\end{figure}
-
-%% ====================================================================
-\subsection{Information--entropy gradient}\label{subsec:information_entropy_gradient}
-The information--entropy gradient, $\text{IG}_{\text{H}}$, measures the gradient of information gain with respect to changes in posterior certainty, that is, the efficiency with which a change in belief gains information.
-
-\paragraph{Gamma oscillations.} Sampling local gradients directs the deposition of the kernel towards where the posterior is changing, so we expect each unit of belief change to yield more information, raising $\text{IG}_{\text{H}}$ (\cref{fig:dig_dh_metrics}a,b).
-% TODO: state the observed trend of dIG/dH against beta and in the heatmap.
-
-\paragraph{Theta rhythmicity.} Theta rhythmicity governs when sampling moves rather than where, so its effect on $\text{IG}_{\text{H}}$ is expected to be indirect, through how fully each well is exploited before transition.
-% TODO: add result, or remove if not computed.
-
-\paragraph{Superdiffusion.} By visiting unexplored modes, superdiffusion reduces posterior entropy where it is least certain, so we expect it to change the information gained per unit of entropy (\cref{fig:dig_dh_metrics}c).
-% TODO: state the observed trend of dIG/dH against alpha at beta=1000.
-
-\begin{figure}[htbp]
-	\centering
-	\begin{subfigure}[b]{0.48\textwidth}
-		\centering
-		\includegraphics[width=\linewidth]{figures/information_metrics/median_ig_per_dent_alpha1p2_vs_beta.pdf}
-		\caption{}\label{fig:dig_dh_beta}
-	\end{subfigure}
-	\hfill
-	\begin{subfigure}[b]{0.48\textwidth}
-		\centering
-		\includegraphics[width=\linewidth]{figures/information_metrics/median_ig_per_dent_heatmap.pdf}
-		\caption{}\label{fig:dig_dh_heatmap}
-	\end{subfigure}
-	
-	\vspace{1em}
-	\begin{subfigure}[b]{0.48\textwidth}
-		\centering
-		\includegraphics[width=\linewidth]{figures/information_metrics/median_ig_per_dent_beta1000_vs_alpha.pdf}
-		\caption{}\label{fig:dig_dh_alpha}
-	\end{subfigure}
-	\caption{\textbf{Information--entropy gradient.} (a) Median $\text{IG}_{\text{H}}$ against the momentum strength $\beta$ at $\alpha = 1.2$. (b) Heatmap of median $\text{IG}_{\text{H}}$. % TODO: state heatmap axes.
-		(c) Median $\text{IG}_{\text{H}}$ against the stability index $\alpha$ at $\beta = 1000$.}
-	\label{fig:dig_dh_metrics}
-\end{figure}
-
-%% ====================================================================
-\subsection{Summary}
-\Cref{tab:metric_pattern_summary} collects the expected effect of each pattern on each metric. Gamma oscillations act at the finest scale to probe local gradients, theta rhythmicity organises when sampling transitions between wells, and superdiffusion sets where the sampler can go. Together they cover complementary aspects of the information-gain curve.
+\subsubsection*{Summary of parameter effects}
+\Cref{tab:param_effects} summarises the change in each metric across the tested range of each parameter, relative to baseline.
 \begin{table}[htbp]
-	\centering
-	\footnotesize
-	
-	\renewcommand{\arraystretch}{1.5}
-	\setlength{\tabcolsep}{3pt}
-	
-	\begin{tabularx}{\textwidth}{
-			@{}
-			>{\raggedright\arraybackslash}m{0.14\textwidth}
-			|>{\raggedright\arraybackslash}X
-			|>{\raggedright\arraybackslash}X
-			|>{\raggedright\arraybackslash}X
-			@{}
-		}
-		\toprule
-		\textbf{Metric}
-		& \textbf{Gamma oscillations}
-		& \textbf{Theta rhythmicity}
-		& \textbf{Superdiffusion} \\
-		\midrule
-		
-		IV
-		& Faster local information extraction
-		& Avoids wasted time in depleted wells
-		& Accesses new high-likelihood regions \\
-		
-		\midrule
-		FPT
-		& Responds to landscape changes
-		& Sets mean waiting time; narrows spread
-		& Enables global access and escape from local traps \\
-		
-		\midrule
-		Shape
-		& Front-loads information gain within wells
-		& Keeps accumulation closer to linear at fixed $\tau$
-		& Sustains information gain later in the trial \\
-		
-		\midrule
-		Gini
-		& Tests evenness across time windows
-		& Promotes more evenly distributed information gain
-		& May produce bursts of information at mode changes \\
-		
-		\midrule
-		$\mathrm{IG}_{\mathrm{H}}$
-		& Supports gradient-directed deposition
-		& Acts indirectly through well exploitation
-		& Changes information gain through exploration of new modes \\
-		
-		\bottomrule
-	\end{tabularx}
-		\caption{Expected effect of each dynamical pattern on each metric. Entries summarise the proposed mechanisms and are to be confirmed  against the results.}	
-	\label{tab:metric_pattern_summary}
+  \centering
+  \small
+  \renewcommand{\arraystretch}{1.3}
+  \begin{tabular}{@{}llccc@{}}
+    \toprule
+    Parameter & Change (fixed values) & $\Delta$FPT (\%) & $\Delta$IV (\%) & $\Delta\gamma$ \\
+    \midrule
+    Gamma $\beta$ & $0 \to 1000$ ($\alpha = 1.2$)
+      & {x [CI]} & {x [CI]} & {x [CI]} \\
+    Theta rhythmicity & Poisson $\to$ rhythmic (matched $\tau$)
+      & {x [CI]} & {x [CI]} & {x [CI]} \\
+    Superdiffusion $\alpha$ & $2 \to {\alpha_{\mathrm{opt}}}$ ($\beta = 1000$)
+      & {x [CI]} & {x [CI]} & {x [CI]} \\
+    \bottomrule
+  \end{tabular}
+  \caption{\textbf{Effect of each dynamical pattern on search metrics.} Change relative to the baseline condition (median across $n = {n}$ trials; 95\% bootstrap CI in brackets). FPT and IV changes are percentages; $\Delta\gamma$ is an absolute change in the shape exponent.}
+  \label{tab:param_effects}
 \end{table}
+
+\subsubsection*{Gamma oscillations ($\beta$)}
+Increasing $\beta$ from $0$ to $1000$ {raised/lowered} median IV by {x\%} (\cref{fig:beta_metrics}b) and {shortened/lengthened} median FPT by {x\%} (\cref{fig:beta_metrics}a), {with the effect saturating above $\beta \approx \ldots$ / increasing monotonically}. The shape exponent {rose from $\gamma = \ldots$ to $\ldots$} (\cref{fig:beta_metrics}c), {i.e.\ information gain became more/less front-loaded}. {One sentence of interpretation, e.g.\ stronger local decorrelation deposits kernel at more independent locations within a well, consistent with the faster extraction of information.} 
+
+
+\begin{figure}[htbp!]
+	\centering
+    \includegraphics[width=\linewidth]{}
+    \caption{\textbf{Effect of the momentum strength $\beta$ at $\alpha = 1.2$.}\textbf{a)} FPT, with the random-search reference (\cref{eq:fpt_baseline}) dashed. \textbf{b)} Information velocity. \textbf{c)} Shape exponent $\mathrm{SE}$. Points show medians over $n = {n}$ trials; bands show 95\% bootstrap CIs.}
+    \label{fig:beta_metrics}
+\end{figure}
+
+
+\subsubsection*{Theta rhythmicity}
+At matched mean $\tau$, rhythmic transitions {increased/decreased} median
+IV by {x\%} relative to Poisson transitions (\cref{fig:theta_metrics}b)
+and {shortened/lengthened} median FPT by {x\%}
+(\cref{fig:theta_metrics}a). Rhythmicity {narrowed/did not change} the
+spread of FPT (IQR {x} vs.\ {y}\,s). The shape exponent was
+{$\gamma = \ldots$ vs.\ $\ldots$} (\cref{fig:theta_metrics}c).
+{One sentence of interpretation, e.g.\ ending each dwell at a
+well-defined point avoids time lost in depleted wells.}
+
+\begin{figure}[htbp!]
+	\centering
+    \includegraphics[width=\linewidth]{}
+    \caption{\textbf{Rhythmic versus Poisson transitions at matched mean $\tau$.} \textbf{a)} FPT. \textbf{b)} Information velocity. \textbf{c)} Shape exponent $\mathrm{SE}$. }
+    \label{fig:theta_metrics}
+\end{figure}
+
+\subsubsection*{Superdiffusion ($\alpha$)}
+At $\beta = 1000$, decreasing $\alpha$ from $2$ (Gaussian) toward $1.2$
+{reduced FPT monotonically / produced a minimum at
+$\alpha_{\mathrm{opt}} \approx \ldots$}, where median FPT was {x\,s}
+({x\%} below the Gaussian case; \cref{fig:alpha_metrics}a). Information
+velocity {followed the same trend / peaked at $\alpha \approx \ldots$}
+(\cref{fig:alpha_metrics}b), and $\gamma$ {rose from $\ldots$ to $\ldots$}
+(\cref{fig:alpha_metrics}c). {One sentence of interpretation, e.g.\ long
+jumps allow escape from depleted wells, sustaining information gain later in
+the trial.}
+
+\begin{figure}[htbp!]
+	\centering
+    \includegraphics[width=\linewidth]{}
+    \caption{\textbf{Effect of the stability index $\alpha$ at $\beta = 1000$.} \textbf{a)} FPT, with the random-search reference dashed. \textbf{b)} Information velocity $\mathrm{IV}$. \textbf{c)} Shape exponent $\mathrm{SE}$. {State summary statistic and error bars.}}
+    \label{fig:alpha_metrics}
+\end{figure}
+
+\subsubsection{Joint dependence on $\alpha$ and $\beta$}
+\Cref{fig:joint_metrics} shows each metric across the full $\alpha \times
+\beta$ grid. {Best performance occurred at $(\alpha, \beta) = (\ldots)$,
+where FPT was x\,s.} {Choose one: The effects of $\alpha$ and $\beta$ were
+approximately additive: the benefit of decreasing $\alpha$ was similar at all
+$\beta$. / The parameters interacted: the benefit of superdiffusion was
+largest at $\beta \gtrsim \ldots$ and vanished at low $\beta$.}
+
+\begin{figure}[htbp!]
+	\centering
+    \includegraphics[width=\linewidth]{}
+    \caption{\textbf{Joint dependence on $\alpha$ and $\beta$.} Heatmaps of median \textbf{a)} FPT, \textbf{b)} information velocity and \textbf{c)} shape exponent $\gamma$. Horizontal axis:{$\beta$}; vertical axis: {$\alpha$}.}
+  \label{fig:joint_metrics}
+\end{figure}
+
+\section*{Summary}
+Each dynamical pattern improved search through a distinct route. Gamma-scale
+momentum $\beta$ {raised the rate of information extraction (IV
+$+x\%$) and shortened FPT by $x\%$}; theta rhythmicity {altered the
+regularity of sampling, changing FPT spread by $x\%$ at matched mean timing};
+and superdiffusion {reduced FPT by $x\%$ at its optimum
+$\alpha \approx \ldots$ by sustaining information gain later in the trial}.
+{State whether the patterns combined additively or interacted.} Together
+these results show that {one-sentence take-home message}.

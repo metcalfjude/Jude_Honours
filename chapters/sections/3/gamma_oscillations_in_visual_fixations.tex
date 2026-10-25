@@ -15,35 +15,36 @@ The present analysis differs from the existing literature in two important respe
 \end{enumerate}
 The fact that the following analysis can be done on the positional data motivates a closer study on the fixational tremor frequency during the rapid fixations which occur during visual search. In particular, testing the hypothesis that this high amplitude gamma-scale microtremor is a sampling process can be tested rigorously through experimental designs presented in \cref{sec:spatiotemporal_predictions}.
 
-\subsection{Analysis of fixational Fourier spectra}
+\subsection{Analysis of fixational power spectra}
+\label{subsec:fixational_spectra}
 
 We analyse the spectral properties of fixational gaze trajectories during visual search. The shorter, more naturalistic fixations in our data pose a challenge for estimating high-frequency motion. In our data collected from \textcite{naher_primate_saccades} fixations contain on average approximately \qty{200}{\milli\second} of data, which yields only about ten cycles of a \qty{50}{\hertz} signal. Moreover, estimating high-frequency motion from noisy position measurements can be dangerous, as the white noise often present in these detectors often approaches tremor amplitude \cite{ko_eye_2016, ryle_simultaneous_2015}.
 
 Our recordings were sampled at \qty{500}{\hertz}, with reported positional precision of up to \qty{36}{\sec} of arc \cite{srresearcheyelink1000specs}. Because low-frequency drift can dominate the positional power spectrum, we analyse velocity rather than position. The expectation of the position spectrum is that it will scale approximately as $\mathrm{PSD}_{\mathbf{x}}(f) \sim f^{-2}$, which is the assumption for tremor-less gaze fixations modelled with Brownian noise \cite{engbert_normal, engbert_integrated_2011}. Velocity, as found through differentiation will multiply spectral power by a factor by  $(2 \pi f)^2$, yielding an approximately flat velocity spectrum with no peak. Thus, under a baseline model with no distinct tremor component, we would expect no peak in the velocity spectrum, instead just a flat baseline with $\mathrm{PSD}_{\mathbf{v}}(f) \sim f^{0}$.
-
-The analysis pipeline is as follows. We apply a fourth-order Butterworth low-pass filter with a cutoff of \qty{200}{\hertz} to reduce high-frequency instrumental noise. We then estimate each eye's two-dimensional velocity by central differencing the filtered position data and compute the Fourier spectrum of the resulting velocity signals. The sampling rate gives a Nyquist frequency of \qty{250}{\hertz}; the chosen filter cutoff is below this limit.
-
 \begin{figure}[htbp]
     \centering
 	\begin{subfigure}[T]{0.48\textwidth}
 		\centering 
-		\includegraphics[width=\linewidth]{figures/fixation_psd_plot.pdf}
+        \includegraphics[width=\linewidth]{figures/fixation_psd_plot.pdf}
 		\label{fig:rate-RCRI}
 	\end{subfigure}
+    \hfill
 	\begin{subfigure}[T]{0.48\textwidth}
 		\centering
 		\includegraphics[width=\linewidth]{figures/Averaged_PSD_Plot.pdf}
 		\label{fig:rate-RCRI}
 	\end{subfigure}
+    \caption{\textbf{Comparison of power spectra from fixations in eye-tracking data and modelled trajectories.} \textbf{a)} The power spectrum taken from the fixational periods of human gaze trajectory data provided by \cite{naher_primate_saccades}. A clear broadband peak is found with a peak centre at $f=\qty{57.62}{\hertz}$. \textbf{b)} The power spectra of fixations as applied to the fixations in the modelled gaze trajectories. A similar broadband peak is found, with peak frequency $f=\qty{78.12}{\hertz}$. \textit{Methods used to pre-process data and construct these power spectra are to be found in \cref{subsec:fixational_spectra}}.}
     \label{fig:fixation_psd}
-    \caption{}
 \end{figure}
-
-\begin{figure}[htbp]
-    \centering
-    \includegraphics[width=0.48\linewidth]{figures/saccade_trace.pdf}
-    \caption{Example eye-movement trace during visual search.}
-    \label{fig:fixation_trace}
-\end{figure}
+% \begin{figure}[htbp]
+%     \centering
+%     \includegraphics[width=0.48\linewidth]{figures/saccade_trace.pdf}
+%     \caption{Example eye-movement trace during visual search.}
+%     \label{fig:fixation_trace}
+% \end{figure}
+\subsubsection*{Data processing}
+The analysis pipeline is as follows, and is identical for both the human eye-tracking data and the model gaze trajectory unless otherwise stated. We collect all fixations across the datasets, either as they are previously labelled in the eye-tracking data, or else by using a variation of the median-filtering method presented in the literature \cite{Schweitzer2020-nu, ENGBERT20031035}, which was verified manually and can be found implemented in \texttt{VisualFNS\_Analysis.jl} (\cref{app:code}). After truncating at any NaN valued, any fixations shorter than \qty{100}{\milli \second} were not considered. We apply a fourth-order Butterworth low-pass filter with a cutoff of \qty{200}{\hertz} to reduce high-frequency instrumental noise near the Nyquist frequency $f_{\text{Nyquist}}=\qty{250}{\hertz}$ in both datasets, as high frequencies will amplify after the following numerical differentiation. We then estimate the two-dimensional velocity by central differencing the filtered position data, and average between the two eyes for the eye-tracking data. Welch's method was then used to construct the power spectra. A Hanning window was used of length \qty{256}{\milli \second} (256 samples) was used, with an overlap of \qty{64}{\milli \second} (64 samples). These spectra are shown in \cref{fig:fixation_psd} with their ensemble size and confidence ribbons.
 
 \subsubsection*{Importance and discovery of gamma-scale fixational dynamics}
+The existence of a high frequency ocular microtremor has been documented in detailed analyses of visual fixation \cite{graham_ocular_2023, roberts_fixational_2013, otero-millan_fixational_2014}, and in studies dedicated to their measurement \cite{higgins_frequency_1953, kaski_ocular_2017}. However, this is the first study to provide a mechanistic prediction of tremor as coherent gamma-frequency exploration of a visual scene. Moreover, this study is the first to study ocular microtremor in the positional measurement of the eye during a search task. For the interested reader, a typical fixation trajectory and its Fourier decomposition are provided in \cref{fig:fixation_trace}. The major difference in the current results compared to other studies of OMT are that the peak frequency is significantly smaller than most estimates, which generally place mean tremor frequency in the range \qtyrange{80}{90}{\hertz}, as well as being slightly lower power. A lower frequency here may suggest a different neurological dynamics during visual exploration compared to a prolonged fixation. This can be compared to the result that the gamma frequency in the brain is found to be higher when viewing local areas of high-contrast \cite{han_gamma_2022, Adjamian2008-rz, RAY2010885}. A physically motivated explanation here may be that the tightly localised attentive potential wells during fixation produce attenuated high frequency signals to ocular muscles, whereas during a search task the unexplored and dynamically salient area promotes higher amplitude low frequency OMT. For a further discussion of the predictive power of this interpretation of OMT as gamma-scale sampling, and experiments and studies which are designed to test this theory, see \cref{sec:spatiotemporal_predictions}.

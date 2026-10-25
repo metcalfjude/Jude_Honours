@@ -5,7 +5,7 @@ The approximate \qty{200}{\ms} timescale of human saccades has long existed expe
 \end{equation}
 where $\sigma_{\ln}$ is the standard deviation of the distribution of ISIs in log-space $\ln \Delta t$, with $\text{CV}_{\ln}$ often called the geometric CV. This $\text{RI}$ is an effective measure of the spread of a strictly positive distribution. A Poisson distributed variable will give $\text{RI}=\frac{\sqrt{6}}{\pi} \approx 0.7800$\footnote{This can be found by first taking an exponentially distributed variable of a Poisson process with mean $\lambda$ as $X \sim \lambda e^{-\lambda X}$, changing variables to find the distribution of $\ln X = Y \sim \lambda \exp[ Y - \lambda \exp Y ]$. This distribution will have $\sigma_{}$}, whereas it is found that for the ISI distribution of subjects considered here for a random NOISE condition is $\text{RI} = 2.69$ \cite{naher_primate_saccades}.
 
-\subsection{Local rhythmicity of saccades}
+\subsection*{Strong rhythmicity of saccades with a slowly changing theta rhythm}
 The recent discovery of the strength of saccade rhythmicity by \textcite{naher_primate_saccades} and others \cite{zubair_eye_2026} required a deep understanding of the rhythmicity of biological systems. A challenge that is often present in biological systems is that timescales are not driven by a perfect clock, but instead the characteristic timescales of certain regular patterns in the brain. As such, the \qty{200}{\milli \second} estimate for saccades during a visual search is not expected to be a universal timescale across subjects and trials. Instead, the model used for such processes in neuroscientific works is a noisy rise-to-threshold model, where a random walk is constructed, and when it reaches a goal, a decision is made \cite{naher_primate_saccades} [CITE]. The noise-driven rise for this process is expected to have a rate which is slowly varying about a characteristic timescale, in the case of saccades around \qtyrange{2}{6}{\hertz}. Since this slowly varying rate is expected to be stable for a single individual and a single trial, we consider a local measure of rhythmicity for the intervals between the saccades within a timseries, called the Inter-Saccadic-Intervals (ISI). Such a metric can be proposed through the local Rate-Corrected Rhythmicity Index (RCRI) \cite{naher_primate_saccades}:
 \begin{equation}\label{eq:RCRI}
 	\text{RCRI} = \frac{1}{1 + \langle \text{CV}_2 \rangle}, \qquad \text{CV}_2(i) = 2\frac{\|\Delta t_{i+1} - \Delta t_{i} \|}{\Delta t_{i+1} + \Delta t_{i}}
@@ -22,9 +22,9 @@ which allows quantification of purely local rhythmicity, comparing each interval
 	\begin{tabularx}{\textwidth}{
 			@{}
 			>{\raggedright\arraybackslash}m{0.14\textwidth}
-			>{\raggedright\arraybackslash}X
-			>{\raggedright\arraybackslash}X
-			>{\raggedright\arraybackslash}X
+			>{\raggedright\arraybackslash}m{0.18\textwidth}
+			>{\raggedright\arraybackslash}m{0.18\textwidth}
+			>{\raggedright\arraybackslash}m{0.1\textwidth}
 			||>{\raggedright\arraybackslash}m{0.14\textwidth}
 			>{\raggedright\arraybackslash}X
 			>{\raggedright\arraybackslash}X
@@ -35,44 +35,44 @@ which allows quantification of purely local rhythmicity, comparing each interval
 		\textbf{Saccade Rate}
 		& \textbf{RCRI}
 		& \textbf{RI}
-		& $\mathbf{t_{\theta}}$ 
+		& $\mathbf{\langle ISI \rangle}$
 		& \textbf{Saccade Rate}
 		& \textbf{RCRI}
 		& \textbf{RI}
-		& $\langle \text{ISI} \rangle$\\
+		& $\mathbf{\langle ISI \rangle}$\\
 		
 		\hline
-		Low
-		& TBD
-		& TBD
-		& TBD
+		$\mathbf{t_{\theta}} = \qty{213.33}{\milli \second}$ 
+		& 0.6787 [\qtyrange{0.675}{0.683}{}]
+		& 2.364 [\qtyrange{2.33}{2.40}{}]
+		& \qty{195.0}{\milli \second}
 		& Low
 		& 0.71
 		& 2.76 
 		& \qty{210}{\milli \second} \\
 		
 		\hline
-		Medium
-		& TBD
-		& TBD
-		& TBD
+		$\mathbf{t_{\theta}} = \qty{177.78}{\milli \second}$ 
+		& 0.6857 [\qtyrange{0.685}{0.692}{}]
+		& 2.237 [\qtyrange{2.20}{2.28}{}]
+		& \qty{178.4}{\milli \second}
 		& Medium
 		& 0.79
 		& 3.43 
 		& \qty{235}{\milli \second} \\
 		
 		\hline
-		High
-		& 5
-		& 5
-		& 5
+		$\mathbf{t_{\theta}} = \qty{142.22}{\milli \second}$ 
+		& 0.6990 [\qtyrange{0.696}{0.702}{}]
+		& 2.116 [\qtyrange{2.08}{2.15}{}]
+		& \qty{152.7}{\milli \second}
 		& High
 		& 0.85
 		& 3.60 
 		& \qty{260}{\milli \second} \\
 		\bottomrule
 	\end{tabularx}
-	\caption{Expected effect of each dynamical pattern on each metric. Entries summarise the proposed mechanisms and are to be confirmed  against the results.}	
+	\caption{\textbf{Effect of saccade rate on rhythmicity and ISI peak.}}	
 	\label{tab:theta_comparison}
 \end{table}
 
@@ -80,7 +80,7 @@ which allows quantification of purely local rhythmicity, comparing each interval
 	\centering
 	\begin{subfigure}[T]{0.4\textwidth}
 		\centering
-		\includegraphics[width=\linewidth]{figures/theta_rhythmicity/Total_ISIs_RCRI.pdf}
+		\includegraphics[width=\linewidth]{figures/theta_rhythmicity/Combined_ISI_Histograms.pdf}
 		\caption{\textbf{Histogram of the inter-saccadic intervals produced from the presented model.}}
 		\label{fig:model_plot}
 	\end{subfigure}
