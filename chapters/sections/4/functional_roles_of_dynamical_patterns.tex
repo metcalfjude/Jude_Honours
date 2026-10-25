@@ -45,7 +45,7 @@ As an analytical reference for $\mathrm{FPT}$, we considered a searcher that fix
   \mathbb{E}[\mathrm{FPT}_0] = t_\theta \, \frac{N+1}{K+1} = \qty{6.0919}{\second}
 \end{equation}
 % For N=256, K=5, t_theta=0.1422 s this evaluates to about 6.1 s -- confirm parameters.
-where $t_\theta$ is the mean saccade interval $t_{\theta} =  \qty{142.22}{\second}$. This reference ignores saliency guidance, momentum and spatial structure, and is drawn as a dashed line in the FPT panels. Two further metrics, the Gini coefficient of binned information gain and the information--entropy gradient $\mathrm{IG}_{\mathrm{H}}$, were also computed and are reported in \cref{app:supp_metrics}.
+where $t_\theta$ is the mean saccade interval $t_{\theta} =  \qty{142.22}{\milli \second}$. 
 
 \subsubsection*{Summary of parameter effects}
 \Cref{tab:param_effects} summarises the change in each metric across the tested range of each parameter, relative to baseline.
@@ -55,88 +55,95 @@ where $t_\theta$ is the mean saccade interval $t_{\theta} =  \qty{142.22}{\secon
   \renewcommand{\arraystretch}{1.3}
   \begin{tabular}{@{}llccc@{}}
     \toprule
-    Parameter & Change (fixed values) & $\Delta$FPT (\%) & $\Delta$IV (\%) & $\Delta\gamma$ \\
+    Parameter & Change (fixed values) & $\rho_{\mathrm{FPT}}$ & $\rho_{\mathrm{IV}}$ & $\rho_{\mathrm{SE}}$ \\
     \midrule
-    Gamma $\beta$ & $0 \to 1000$ ($\alpha = 1.2$)
-      & {x [CI]} & {x [CI]} & {x [CI]} \\
-    Theta rhythmicity & Poisson $\to$ rhythmic (matched $\tau$)
-      & {x [CI]} & {x [CI]} & {x [CI]} \\
-    Superdiffusion $\alpha$ & $2 \to {\alpha_{\mathrm{opt}}}$ ($\beta = 1000$)
-      & {x [CI]} & {x [CI]} & {x [CI]} \\
+    Local oscillations $\beta$ & $0 \to 1000$ ($\alpha = 1.2$)
+	& {-0.344 [{0.633},{0.091}]} & {-0.641 [{-0.297},{-0.890}]} & {-0.661 [{-0.844},{-0.430}]}\\
+    Kernel rhythmicity & rhythmic
+      & N/A & N/A & {x [CI]} \\
+    Superdiffusion $\alpha$ & $2 \to 1.2$ ($\beta = 1000$)
+      & {0.554 [{0.262},{0.781}]} & {-0.748 [{-0.898},{-0.430}]} & {-0.661 [{-0.844},{-0.430}]}\\
     \bottomrule
   \end{tabular}
-  \caption{\textbf{Effect of each dynamical pattern on search metrics.} Change relative to the baseline condition (median across $n = {n}$ trials; 95\% bootstrap CI in brackets). FPT and IV changes are percentages; $\Delta\gamma$ is an absolute change in the shape exponent.}
+  \caption{\textbf{Effect of Spearman's correlation between each dynamical parameter and search metrics.} Change relative to the baseline condition (median across $n = {250}$ trials; 95\% bootstrap CI in brackets).}
   \label{tab:param_effects}
 \end{table}
 
-\subsubsection*{Gamma oscillations ($\beta$)}
-Increasing $\beta$ from $0$ to $1000$ {raised/lowered} median IV by {x\%} (\cref{fig:beta_metrics}b) and {shortened/lengthened} median FPT by {x\%} (\cref{fig:beta_metrics}a), {with the effect saturating above $\beta \approx \ldots$ / increasing monotonically}. The shape exponent {rose from $\gamma = \ldots$ to $\ldots$} (\cref{fig:beta_metrics}c), {i.e.\ information gain became more/less front-loaded}. {One sentence of interpretation, e.g.\ stronger local decorrelation deposits kernel at more independent locations within a well, consistent with the faster extraction of information.} 
+%\begin{figure}[htbp!]
+%	\centering
+%    \includegraphics[width=\linewidth]{}
+%    \caption{\textbf{Effect of the momentum strength $\beta$ at $\alpha = 1.2$.}\textbf{a)} FPT, with the random-search reference (\cref{eq:fpt_baseline}) dashed. \textbf{b)} Information velocity. \textbf{c)} Shape exponent $\mathrm{SE}$. Points show medians over $n = {n}$ trials; bands show 95\% bootstrap CIs.}
+%    \label{fig:beta_metrics}
+%\end{figure}
 
+\subsubsection*{Theta rhythmicity ($\tau$)}
+The strength of rhythmicity between points of interest is difficult to quantify, since any modulation of kernel dynamics will trivially change the dynamics of information gathering, as our model couples rhythmicity with information gathering. Thus, we examine rhythmicity only through a single metric which has been decoupled with time: the shape exponent $\mathrm{SE}$.
 
-\begin{figure}[htbp!]
+\subsubsection*{Local oscillations ($\beta$)}
+Local momentum-driven oscillations have here been shown to both improve local sampling efficiency, as well as global responsiveness to transitions. Local sampling can be measured by the information velocity. Our results show that $\mathrm{IV}$ has the highest correlation with $\beta$, supporting this hypothesis. However, global search efficiency benefits from the momentum-driven dynamics, as shown in the positive correlations with $\mathrm{FPT}$ and $\mathrm{SE}$.
+
+\begin{figure}[htbp]
 	\centering
-    \includegraphics[width=\linewidth]{}
-    \caption{\textbf{Effect of the momentum strength $\beta$ at $\alpha = 1.2$.}\textbf{a)} FPT, with the random-search reference (\cref{eq:fpt_baseline}) dashed. \textbf{b)} Information velocity. \textbf{c)} Shape exponent $\mathrm{SE}$. Points show medians over $n = {n}$ trials; bands show 95\% bootstrap CIs.}
-    \label{fig:beta_metrics}
+	\begin{subfigure}[T]{0.32\textwidth}
+		\centering 
+		\includegraphics[width=\linewidth]{figures/information_metrics/FPT_b.pdf}
+		\label{fig:rate-RCRI}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[T]{0.32\textwidth}
+		\centering
+		\includegraphics[width=\linewidth]{figures/information_metrics/IV_b.pdf}
+		\label{fig:rate-RCRI}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[T]{0.32\textwidth}
+		\centering
+		\includegraphics[width=\linewidth]{figures/information_metrics/SE_b.pdf}
+		\label{fig:rate-RCRI}
+	\end{subfigure}
+	\label{fig:super_metrics}
+	\caption{\textbf{Trends in three key information metrics with local oscillations.}}
 \end{figure}
 
 
-\subsubsection*{Theta rhythmicity}
-At matched mean $\tau$, rhythmic transitions {increased/decreased} median
-IV by {x\%} relative to Poisson transitions (\cref{fig:theta_metrics}b)
-and {shortened/lengthened} median FPT by {x\%}
-(\cref{fig:theta_metrics}a). Rhythmicity {narrowed/did not change} the
-spread of FPT (IQR {x} vs.\ {y}\,s). The shape exponent was
-{$\gamma = \ldots$ vs.\ $\ldots$} (\cref{fig:theta_metrics}c).
-{One sentence of interpretation, e.g.\ ending each dwell at a
-well-defined point avoids time lost in depleted wells.}
-
-\begin{figure}[htbp!]
-	\centering
-    \includegraphics[width=\linewidth]{}
-    \caption{\textbf{Rhythmic versus Poisson transitions at matched mean $\tau$.} \textbf{a)} FPT. \textbf{b)} Information velocity. \textbf{c)} Shape exponent $\mathrm{SE}$. }
-    \label{fig:theta_metrics}
-\end{figure}
+%\begin{figure}[htbp!]
+%	\centering
+%    \includegraphics[width=\linewidth]{}
+%    \caption{\textbf{Rhythmic versus Poisson transitions at matched mean $\tau$.} \textbf{a)} FPT. \textbf{b)} Information velocity. \textbf{c)} Shape exponent $\mathrm{SE}$. }
+%    \label{fig:theta_metrics}
+%\end{figure}
 
 \subsubsection*{Superdiffusion ($\alpha$)}
-At $\beta = 1000$, decreasing $\alpha$ from $2$ (Gaussian) toward $1.2$
-{reduced FPT monotonically / produced a minimum at
-$\alpha_{\mathrm{opt}} \approx \ldots$}, where median FPT was {x\,s}
-({x\%} below the Gaussian case; \cref{fig:alpha_metrics}a). Information
-velocity {followed the same trend / peaked at $\alpha \approx \ldots$}
-(\cref{fig:alpha_metrics}b), and $\gamma$ {rose from $\ldots$ to $\ldots$}
-(\cref{fig:alpha_metrics}c). {One sentence of interpretation, e.g.\ long
-jumps allow escape from depleted wells, sustaining information gain later in
-the trial.}
+We recover the result that a sparse search for a target is optimally performed under a superdiffusive trajectory, even combined with our additional modelled dynamics. This is robustly seen in the strong positive correlation between $\alpha$ and $\mathrm{FPT}$, as well as the strong negative correlations between $\alpha$ with both $\mathrm{IV}$ and $\mathrm{SE}$.
 
-\begin{figure}[htbp!]
+\begin{figure}[htbp]
 	\centering
-    \includegraphics[width=\linewidth]{}
-    \caption{\textbf{Effect of the stability index $\alpha$ at $\beta = 1000$.} \textbf{a)} FPT, with the random-search reference dashed. \textbf{b)} Information velocity $\mathrm{IV}$. \textbf{c)} Shape exponent $\mathrm{SE}$. {State summary statistic and error bars.}}
-    \label{fig:alpha_metrics}
+	\begin{subfigure}[T]{0.32\textwidth}
+		\centering 
+		\includegraphics[width=\linewidth]{figures/information_metrics/FPT_a.pdf}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[T]{0.32\textwidth}
+		\centering
+		\includegraphics[width=\linewidth]{figures/information_metrics/IV_a.pdf}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[T]{0.32\textwidth}
+		\centering
+		\includegraphics[width=\linewidth]{figures/information_metrics/SE_a.pdf}
+	\end{subfigure}
+	\label{fig:beta_metrics}
+	\caption{\textbf{Trends in three key information metrics with global superdiffusion.}}
 \end{figure}
 
-\subsubsection{Joint dependence on $\alpha$ and $\beta$}
-\Cref{fig:joint_metrics} shows each metric across the full $\alpha \times
-\beta$ grid. {Best performance occurred at $(\alpha, \beta) = (\ldots)$,
-where FPT was x\,s.} {Choose one: The effects of $\alpha$ and $\beta$ were
-approximately additive: the benefit of decreasing $\alpha$ was similar at all
-$\beta$. / The parameters interacted: the benefit of superdiffusion was
-largest at $\beta \gtrsim \ldots$ and vanished at low $\beta$.}
+%\subsubsection*{Interactions of dynamical signatures}
 
-\begin{figure}[htbp!]
-	\centering
-    \includegraphics[width=\linewidth]{}
-    \caption{\textbf{Joint dependence on $\alpha$ and $\beta$.} Heatmaps of median \textbf{a)} FPT, \textbf{b)} information velocity and \textbf{c)} shape exponent $\gamma$. Horizontal axis:{$\beta$}; vertical axis: {$\alpha$}.}
-  \label{fig:joint_metrics}
-\end{figure}
+
+%\begin{figure}[htbp!]
+%	\centering
+%    \includegraphics[width=\linewidth]{}
+%    \caption{\textbf{Joint dependence on $\alpha$ and $\beta$.} Heatmaps of median \textbf{a)} FPT, \textbf{b)} information velocity and \textbf{c)} shape exponent $\gamma$. Horizontal axis:{$\beta$}; vertical axis: {$\alpha$}.}
+%  \label{fig:joint_metrics}
+%\end{figure}
 
 \section*{Summary}
-Each dynamical pattern improved search through a distinct route. Gamma-scale
-momentum $\beta$ {raised the rate of information extraction (IV
-$+x\%$) and shortened FPT by $x\%$}; theta rhythmicity {altered the
-regularity of sampling, changing FPT spread by $x\%$ at matched mean timing};
-and superdiffusion {reduced FPT by $x\%$ at its optimum
-$\alpha \approx \ldots$ by sustaining information gain later in the trial}.
-{State whether the patterns combined additively or interacted.} Together
-these results show that {one-sentence take-home message}.
