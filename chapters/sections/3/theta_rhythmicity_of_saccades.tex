@@ -78,25 +78,22 @@ which allows quantification of purely local rhythmicity, comparing each interval
 
 \begin{figure}[htbp!]
 	\centering
-	\begin{subfigure}[T]{0.4\textwidth}
+	\begin{subfigure}[T]{0.36\textwidth}
 		\centering
 		\includegraphics[width=\linewidth]{figures/theta_rhythmicity/Combined_ISI_Histograms.pdf}
-		\caption{\textbf{Histogram of the inter-saccadic intervals produced from the presented model.}}
 		\label{fig:model_plot}
 	\end{subfigure}
 	\hfill
-	\begin{subfigure}[T]{0.29\textwidth}
-		\centering
-		\includegraphics[width=\linewidth]{figures/RCRI.png}
-		\caption{\textbf{Rate-corrected rhythmicity index (RCRI) is positively correlated with saccade rate.}}
-		\label{fig:rate-RCRI}
-	\end{subfigure}
-	\hfill
-	\begin{subfigure}[T]{0.29\textwidth}
+	\begin{subfigure}[T]{0.3\textwidth}
 		\centering
 		\includegraphics[width=\linewidth]{figures/ISI.png}
-		\caption{\textbf{The probability distribution of inter-saccadic intervals (ISIs) are tightly distributed in a Gamma-10 distribution.}}
 		\label{fig:gamma_fits}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[T]{0.3\textwidth}
+		\centering
+		\includegraphics[width=\linewidth]{figures/RCRI.png}
+		\label{fig:rate-RCRI}
 	\end{subfigure}
 	\caption{\textbf{(a)} shows the distribution of ISIs given by the presented model, and shows the Gamma-renewal model fit. For the given parameters (as in \cref{sec:model_setup}), the fit gives $\text{RCRI}=0.695, k=6.479, \langle \text{ISI} \rangle=\qty{148.5}{\milli \second}$. This is compared to the theta rhythm given by our model parameters of $t_{\theta} = \tau \times {\sigma_{\text{k}}^2}/{\sigma_{\text{fix}}^2}=\qty{142.2}{\milli \second}$. We thus find that the model produces a high degree of rhythmicity from the adaptive kernel added to the model. \textbf{(b)} shows the result that trials binned with shorter ISIs are correlated with a high rhythmicity of saccades ($\mathbf{\rho} = 0.39, P=0.001$). Such a conclusion corresponds to the kernel dynamics presented, where faster kernel dynamics will increase rhythmic transitions (see \cref{subsec:adaptive_kernel_dynamics}). \textbf{(c)} presents the empirical distribution of ISIs after trials are binned into low- medium- and high-tertiles. \textit{\textbf{(b)} and \textbf{(c)} adapted from Figure.~5 of \textcite{naher_primate_saccades}}}
 	\label{fig:local_rhythmicity}
