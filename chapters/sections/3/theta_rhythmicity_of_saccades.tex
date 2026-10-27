@@ -3,7 +3,7 @@ The approximate \qty{200}{\ms} timescale of human saccades has long existed expe
 \begin{equation}
 	\text{RI} = \frac{1}{\text{CV}_{\ln}}, \qquad \text{CV}_{\ln} = \sqrt{e^{\sigma_{\ln}^2} - 1}
 \end{equation}
-where $\sigma_{\ln}$ is the standard deviation of the distribution of ISIs in log-space $\ln \Delta t$, with $\text{CV}_{\ln}$ often called the geometric CV. This $\text{RI}$ is an effective measure of the spread of a strictly positive distribution. A Poisson distributed variable will give $\text{RI}=\frac{\sqrt{6}}{\pi} \approx 0.7800$\footnote{This can be found by first taking an exponentially distributed variable of a Poisson process with mean $\lambda$ as $X \sim \lambda e^{-\lambda X}$, changing variables to find the distribution of $\ln X = Y \sim \lambda \exp[ Y - \lambda \exp Y ]$. This distribution will have $\sigma_{}$}, whereas it is found that for the ISI distribution of subjects considered here for a random NOISE condition is $\text{RI} = 2.69$ \cite{naher_primate_saccades}.
+where $\sigma_{\ln}$ is the standard deviation of the distribution of ISIs in log-space $\ln \Delta t$, with $\text{CV}_{\ln}$ often called the geometric CV. This $\text{RI}$ is an effective measure of the spread of a strictly positive distribution. A Poisson distributed variable will give $\text{RI}=\frac{\sqrt{6}}{\pi} \approx 0.7800$\footnote{This can be found from the exponentially distributed intervals of a Poisson process with mean $\lambda$ as $X \sim \lambda e^{-\lambda X}$, changing variables to find the distribution of $\ln X = Y \sim \lambda \exp[ Y - \lambda \exp Y ]$. This distribution will have $\sigma_{\ln} = 0.986$}, whereas it is found that for the ISI distribution of subjects considered here for a random NOISE condition is $\text{RI} = 2.69$ \cite{naher_primate_saccades}.
 
 \subsection*{Strong rhythmicity of saccades with a slowly changing theta rhythm}
 The recent discovery of the strength of saccade rhythmicity by \textcite{naher_primate_saccades} and others \cite{zubair_eye_2026} required a deep understanding of the rhythmicity of biological systems. A challenge that is often present in biological systems is that timescales are not driven by a perfect clock, but instead the characteristic timescales of certain regular patterns in the brain. As such, the \qty{200}{\milli \second} estimate for saccades during a visual search is not expected to be a universal timescale across subjects and trials. Instead, the model used for such processes in neuroscientific works is a noisy rise-to-threshold model, where a random walk is constructed, and when it reaches a goal, a decision is made \cite{naher_primate_saccades} [CITE]. The noise-driven rise for this process is expected to have a rate which is slowly varying about a characteristic timescale, in the case of saccades around \qtyrange{2}{6}{\hertz}. Since this slowly varying rate is expected to be stable for a single individual and a single trial, we consider a local measure of rhythmicity for the intervals between the saccades within a timseries, called the Inter-Saccadic-Intervals (ISI). Such a metric can be proposed through the local Rate-Corrected Rhythmicity Index (RCRI) \cite{naher_primate_saccades}:
@@ -18,6 +18,8 @@ which allows quantification of purely local rhythmicity, comparing each interval
 	
 	\renewcommand{\arraystretch}{1.5}
 	\setlength{\tabcolsep}{3pt}
+	
+	\caption{\textbf{Effect of saccade rate on rhythmicity and ISI peak.}}	
 	
 	\begin{tabularx}{\textwidth}{
 			@{}
@@ -72,7 +74,6 @@ which allows quantification of purely local rhythmicity, comparing each interval
 		& \qty{260}{\milli \second} \\
 		\bottomrule
 	\end{tabularx}
-	\caption{\textbf{Effect of saccade rate on rhythmicity and ISI peak.}}	
 	\label{tab:theta_comparison}
 \end{table}
 
