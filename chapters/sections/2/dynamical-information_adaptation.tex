@@ -48,7 +48,6 @@ We now predict analytically the rate of excursions under these modelled dynamics
 	\caption[width=\linewidth]{\textbf{Schematic representation of kernel dynamics influencing an information-driven transition between potential wells.} \textbf{a)} Two potential wells in a 1D potential landscape, with a high potential region separating them, which would represent low saliency in a model of gaze. $\textbf{x}_0$ is positioned in the left well, which represents gaze position. \textbf{b)} Information acquisition as the kernel (orange) grows, gaining information and raising the potential landscape locally. \textbf{c)} A saccade-like transition, where the left potential well is inverted, followed by a transition to the right potential well. \textbf{d)} Exploration in the right well, with the information-gathering cycle resetting on a long $t_{\theta}$-scale.}
 	\label{fig:kernel_theta_panel}
 \end{figure}
-
 We consider a single isotropic Gaussian mode of the target distribution, centred at zero with standard deviation $\sigma_{\text{fix}}$, and gaze position fixating within it. In terms of the radial coordinate $r$ about the mode, the effective potential $V_t(r)$ therefore starts as the quadratic well
 \begin{equation*}
     V_0(r) = -\ln\pi_0(\mathbf{x}) = \frac{r^2}{2\sigma_{\text{fix}}^2}.
@@ -62,7 +61,7 @@ which integrates to
     V_t(r) = \frac{r^2}{2\sigma_{\text{fix}}^2} + \frac{t}{\tau} \exp \left(-\frac{r^2}{2\sigma_k^2}\right).
 \end{equation}
 
-The excursion criterion here is that the radial second spatial derivative of the explored potential at the fixation point $r=0$ becomes negative, leaving the gaze unconstrained. The second spatial derivative is
+The excursion criterion here is a negative radial second derivative of the explored potential at the fixation point $r=0$, leaving the gaze unconstrained. The second spatial derivative is
 \begin{equation*}
     \frac{\partial^2 V_t(r)}{\partial r^2} = \frac{1}{\sigma_{\text{fix}}^2} + \frac{t}{\tau\,\sigma_k^2}\left(\frac{r^2}{\sigma_k^2} - 1\right)\exp\left\{-\frac{r^2}{2\sigma_k^2}\right\},
 \end{equation*}

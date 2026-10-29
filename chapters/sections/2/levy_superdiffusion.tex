@@ -34,10 +34,10 @@ which gives
     \left[\left(\textbf{v}_0 + \mathcal{O}(\Delta \textbf{x}) + \mathcal{O}(\Delta t)\right)P\right]\\
     \nonumber
     \partial_t P(\Delta \textbf{x},\Delta t) &= -\gamma\mathcal{D}^{\alpha}_\textbf{x}P - \mathbf{v}_0\cdot\nabla_{\mathbf{x}}P +  \left[\mathcal{O}(\Delta t^0) + \mathcal{O}(\Delta t^{1 - 1/\alpha})\right] \cdot P\\
-    \partial_t \hat P(\mathbf{k},\Delta t) &= -\gamma\|\mathbf{k}\|^{\alpha}\hat P - i\,\mathbf{v}_0\cdot\mathbf{k}\,\hat P + \mathcal{O}(\Delta t^0)\\
+    \partial_t \hat P(\mathbf{k},\Delta t) &= -\gamma\|\mathbf{k}\|^{\alpha}\hat P - i\,\mathbf{v}_0\cdot\mathbf{k}\,\hat P + \mathcal{O}(\Delta t^0) \hat{P}\\
     \implies \hat P(\mathbf{k},\Delta t) &= \exp\left[-\gamma\|\mathbf{k}\|^{\alpha}\Delta t - i\mathbf{v}_0\cdot\mathbf{k}\,\Delta t\right] [1 + \mathcal{O}(\Delta t)] \label{eq:characteristic_equation}
 \end{align}
-Showing that, to first order in $\Delta t$, the short-time diffusion under our model \cref{eq:fns_system} yields a $\mathcal{S}\alpha\mathcal{S}$ distribution which is instantaneously transported with velocity  $\mathbf{v}_0 = \gamma \textbf{b}_0 + \beta \textbf{p}_0$.
+Showing that, to first order in $\Delta t$, the short-time diffusion under our model \cref{eq:fns_system} yields a $\mathcal{S}\alpha\mathcal{S}$ distribution, defined through it's characteristic function, which is transported with velocity  $\mathbf{v}_0 = \gamma \textbf{b}_0 + \beta \textbf{p}_0$.
 
 \subsubsection*{Quantification of Lévy superdiffusion monoscaling}
 Following on from the solution for the characteristic equation $\hat{P}(\textbf{k},\Delta t) = \exp\left[-\gamma\|\mathbf{k}\|^{\alpha}\Delta t - i\mathbf{v}_0\cdot\mathbf{k}\,\Delta t\right] [1 + \mathcal{O}(\Delta t)]$, we reduce to the characteristic function of Fourier-space jump sized $k=\|\textbf{k}\|$. For $0<q<2$ this change of variables will give the relation \cite{matsui_fractional_2016}
@@ -57,6 +57,21 @@ where the first term is the moment of an $\alpha$-stable Lévy flight with scale
 \begin{equation}
     \langle \| \Delta \mathbf{x} \|^q \rangle \propto \Delta t^{\lambda(q)}, \qquad \lambda(q) = \frac{q}{\alpha}, \qquad 0<q<\alpha.
 \end{equation}
+\begin{figure}[htbp!]
+	\centering
+	\begin{subfigure}[t]{0.49\textwidth}
+		\centering
+		\panel{a)}{figures/schematics/mono_monoscaling.png}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[t]{0.49\textwidth}
+		\centering
+		\panel{b)}{figures/schematics/sand_multiscaling.png}
+	\end{subfigure}
+	\vspace{-1em}
+	\caption{\textbf{Moment spectra $\bm{\lambda(q)}$ distinguish mono- and multiscaling superdiffusion.} The spectrum is defined by $\langle \|\Delta \mathbf{x}\|^q \rangle \sim \Delta t^{\lambda(q)}$, with $q$ the moment order (\cref{eq:MFD}). \textbf{a)} Monoscaling: $\lambda(q)$ is linear in $q$. For a Lévy flight with stability index $\alpha$, $\lambda(q)=q/\alpha$ for $q<\alpha$ (\cref{eq:fractional_moment_result}). Both gaze data and our model are monoscaling up to $q=3.0$, implying a unified process driving motion across spatial scales (\cref{sec:search_superdiffusion}). \textbf{b)} Multiscaling (strong anomalous diffusion, SAND): $\lambda(q)$ is piecewise linear, with a slope change separating small displacements (low $q$, here normal diffusion) from large ones (high $q$, here superdiffusion). This is typical of a Lévy walk or of local Brownian motion punctuated by rare large jumps \cite{wang_strong_2020}, the standard model of gaze as fixation punctuated by rare saccades.}
+	\label{fig:SANDvsmono}
+\end{figure}
 Thus, for $q<\alpha$ the modelled dynamics of \cref{eq:fns_system} reproduce the scaling of a Lévy flight \cite{metzler_random_2000}. Such superdiffusion will produce a self-similar process with a single scaling exponent $1/\alpha > 1/2$ across all scales. This is called monoscaling superdiffusion, where superdiffusion is present and identical across all scales of $q$.
 
 However, for $q\geq\alpha$ the moments of an unbounded Lévy flight diverge and the expansion above no longer applies. It is thus important to computationally examine the behaviour of a Lévy flight during exploration of particular potentials, whether or not they are unbounded or dynamic, and if any post-processing is done to handle divergences in the variance of jumps. In other studies, Lévy flights have been found to have $\lambda(q) \neq \frac{q}{\alpha}$, and are thus proposed to be multifractal with different scaling behaviour for large jumps as for small. This is the signature of strong anomalous diffusion \cite{castiglione_strong_1999}, however it is misleading, as a Lévy flight is defined by monoscaling self-similarity. In this study, we find that under the confined dynamics and light low pass filtering to produce continuous trajectories, the Lévy flight yields a single monoscaling superdiffusive exponent of $\lambda(q) = \frac{q}{\alpha}$
