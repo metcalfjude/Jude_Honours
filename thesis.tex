@@ -31,8 +31,11 @@
 	
 	%-------------- Table of contents
 	\cleardoublepage
-	\phantomsection \pdfbookmark[0]{Contents}{Contents} 
-	\tableofcontents
+    \begingroup
+        \small
+    	\phantomsection \pdfbookmark[0]{Contents}{Contents} 
+    	\tableofcontents
+    \endgroup
 	% \addcontentsline{toc}{chapter}{\listfigurename}
 	% \listoffigures
 	% \addcontentsline{toc}{chapter}{\listtablename}
@@ -53,6 +56,13 @@
     \include{chapters/chapter4}
     \include{chapters/chapter5}
 	
+	%-------------- Bibliography
+	\cleardoublepage
+	\phantomsection  
+	\addcontentsline{toc}{chapter}{Bibliography}  
+
+	\printbibliography
+	
 	%-------------- Appendices
 	\cleardoublepage
 	\appendix
@@ -60,11 +70,4 @@
 	\include{appendices/model_appendix}
     \include{appendices/code_appendix}
     \include{appendices/fixation_decomposition}
-	
-	%-------------- Bibliography
-	\cleardoublepage
-	\phantomsection  
-	\addcontentsline{toc}{chapter}{Bibliography}  
-
-	\printbibliography
 \end{document}

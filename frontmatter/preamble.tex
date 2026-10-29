@@ -62,12 +62,26 @@
 
 %-------------------- Bibliography
 
-\usepackage[sortcites,
-            backend=biber,
-            style=numeric-comp,
-            url=false,
-            eprint=false,
-            sorting=none]{biblatex}
+% \usepackage[sortcites,
+%             backend=biber,
+%             style=numeric-comp,
+%             url=false,
+%             eprint=false,
+%             sorting=none]{biblatex}
+
+\usepackage[backend=biber,
+            style=phys,
+            articletitle=true,
+            biblabel=brackets,
+            chaptertitle=true,
+            pageranges=true]{biblatex}
+
+
+% Suppress language fields 
+\AtEveryBibitem{
+  \clearlist{language}
+  \clearlist{doi}
+}
 
 
 %-------------------- Hyperlinks in your document.
@@ -94,11 +108,11 @@
 \usepackage[capitalize, noabbrev]{cleveref}
 \crefname{appendix}{Appendix}{Appendices}
 
-
 \usepackage{graphicx}
 \usepackage{subcaption}
 \usepackage[inkscapelatex=false]{svg}
 
+\usepackage{wrapfig}
 
 %------------------- Tabular 
 
@@ -108,3 +122,15 @@
 \usepackage{float}
 
 \usepackage{enumitem}
+
+\usepackage{tikz}
+
+% \panel[width]{label}{image path}   (width defaults to \linewidth)
+\newcommand{\panel}[3][\linewidth]{%
+  \begin{tikzpicture}
+    \node[anchor=south west, inner sep=0] (img) at (0,0)
+      {\includegraphics[width=#1]{#3}};
+    \node[anchor=north west, inner sep=2pt, font=\bfseries\large]
+      at (img.north west) {#2};
+  \end{tikzpicture}%
+}
