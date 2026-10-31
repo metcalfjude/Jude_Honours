@@ -3,14 +3,14 @@ The approximate \qty{200}{\ms} timescale of human saccades has long been underst
 \begin{equation}
 	\text{RI} = \frac{1}{\text{CV}_{\ln}}, \qquad \text{CV}_{\ln} = \sqrt{e^{\sigma_{\ln}^2} - 1}
 \end{equation}
-where $\sigma_{\ln}$ is the standard deviation of the distribution of the natural log of ISIs $\ln \Delta t$, with $\text{CV}_{\ln}$ often called the geometric CV. This $\text{RI}$ is an effective measure of the spread of a strictly positive distribution. A Poisson distributed variable will give $\text{RI}=\frac{\sqrt{6}}{\pi} \approx 0.7800$\footnote{This can be found from the exponentially distributed intervals of a Poisson process with mean $\lambda$ as $X \sim \lambda e^{-\lambda X}$, changing variables to find the distribution of $\ln X = Y \sim \lambda \exp[ Y - \lambda \exp Y ]$. This distribution will have $\sigma_{\ln} = 0.986$}, and it is found that for an ISI distribution gathered from saccades across a disordered grid of dots is $\text{RI} = 2.69$ \cite{naher_primate_saccades}.
+where $\sigma_{\ln}$ is the standard deviation of the distribution of the natural log of ISIs $\ln \Delta t$, with $\text{CV}_{\ln}$ often called the geometric CV. This $\text{RI}$ is an effective measure of the spread of a strictly positive distribution. A Poisson distributed variable will give $\text{RI}\approx 0.4891$\footnote{This can be found from the exponentially distributed intervals of a Poisson process with mean $\lambda$ as $X \sim \lambda e^{-\lambda X}$, changing variables to find the distribution of $\ln X = Y \sim \lambda \exp[ Y - \lambda \exp Y ]$. This distribution will have $\sigma_{\ln} = \frac{\pi}{\sqrt{6}} \approx 1.283$.}, and it is found that for an ISI distribution gathered from saccades across a disordered grid of dots is $\text{RI} = 2.69$ \cite{naher_primate_saccades}.
 
 \subsection*{Strong rhythmicity of saccades with a slowly changing theta rhythm}
-The recent discovery of the strength of saccade rhythmicity by \textcite{naher_primate_saccades} required an accounting of the variable rhythms of biological systems. The timescales of the brain are not driven by a perfect clock, but instead from characteristic durations of certain regular patterns. As such, the \qty{200}{\milli \second} estimate for saccades during a visual search is not expected to be a universal timescale across subjects and trials. In the case of saccades, this rate can variabley be found in the theta-band of frequencies \qtyrange{4}{8}{\hertz} (see \cref{subsec:neur_freq_bands}). This slowly varying theta rate is expected to be stable within a single individual and a single trial, and thus we consider a local measure of rhythmicity between the intervals between saccades, called inter-saccadic-intervals (ISI). Such a metric can be proposed through the local rate-corrected rhythmicity index (RCRI) \cite{naher_primate_saccades}:
+The recent discovery of the strength of saccade rhythmicity by \textcite{naher_primate_saccades} required an accounting of the variable rhythms of biological systems. A perfect clock does not drive the timescales of the brain, but instead is based on characteristic durations of certain regular patterns. As such, the \qty{200}{\milli \second} estimate for saccades during a visual search is not expected to be a universal timescale across subjects and trials. In the case of saccades, this rate can be found to vary within the theta-band of frequencies \qtyrange{4}{8}{\hertz} (see \cref{subsec:neur_freq_bands}). This slowly varying theta rate is expected to be stable within a single individual and a single trial; thus, we consider a local measure of rhythmicity based on the intervals between saccades, called inter-saccadic intervals (ISI). Such a metric can be proposed through the local rate-corrected rhythmicity index (RCRI) \cite{naher_primate_saccades}:
 \begin{equation}\label{eq:RCRI}
 	\text{RCRI} = \frac{1}{1 + \langle \text{CV}_2 \rangle}, \qquad \text{CV}_2(i) = 2\frac{\|\Delta t_{i+1} - \Delta t_{i} \|}{\Delta t_{i+1} + \Delta t_{i}}
 \end{equation}
-which allows quantification of purely pairwise rhythmicity, comparing each interval $\Delta t_{i+1}$ to it's predecessor $\Delta t_{i}$, and averaging across all intervals $i$ considered. To give baseline values, the $\text{RCRI}$ of a Poisson process is $\text{RCRI}=0.5$, and a perfectly rhythmic process will give $\text{RCRI}=1$. The use of RCRI as a local metric for rhythmicity has produced two results. Firstly, human saccades are very strongly rhythmic, with $\text{RCRI} \approx 0.765$ for saccades exploring a disordered grid of dots \cite{naher_primate_saccades}. Secondly, it has been found that the instantaneous saccade rate is a strong predictor for the local saccade rhythmicity $\text{RCRI}$, with a Pearson correlation found to be $\rho=0.39, P=0.001$, with saccade rate acting as a significant predictor of $\text{RCRI}$ with $\beta=\qty{0.0114}{\hertz^{-1}}, P=0.014$ \cite{naher_primate_saccades}. It has been found that those trials binned into the low-, medium-, and high- saccade rate tertiles will show a positive correlation of saccade rate with higher RCRI \cite{naher_primate_saccades}, as shown in \cref{fig:local_rhythmicity}\textbf{b)}. A table comparing these indices and rhythmic patterns is also shown below in \cref{tab:theta_comparison}
+which allows quantification of purely pairwise rhythmicity by comparing each interval $\Delta t_{i+1}$ to its predecessor $\Delta t_{i}$, and averaging across all intervals $i$ considered. To give baseline values, the $\text{RCRI}$ of a Poisson process is $\text{RCRI}=0.5$, and a perfectly rhythmic process will give $\text{RCRI}=1$. The use of RCRI as a local metric for rhythmicity has produced two results. Firstly, human saccades are very strongly rhythmic, with $\text{RCRI} \approx 0.765$ for saccades exploring a disordered grid of dots \cite{naher_primate_saccades}. Secondly, it has been found that the instantaneous saccade rate is a strong predictor for the local saccade rhythmicity $\text{RCRI}$, with a Pearson correlation found to be $\rho=0.39, P=0.001$, with saccade rate acting as a significant predictor of $\text{RCRI}$ with $\beta=\qty{0.0114}{\hertz^{-1}}, P=0.014$ \cite{naher_primate_saccades}. It has been found that those trials binned into the low-, medium-, and high- saccade rate tertiles will show a positive correlation of saccade rate with higher RCRI \cite{naher_primate_saccades}, as shown in \cref{fig:local_rhythmicity}\textbf{b)}. A table comparing these indices and rhythmic patterns is also shown below in \cref{tab:theta_comparison}
 
 \begin{table}[htbp]
 	\centering
@@ -52,11 +52,11 @@ which allows quantification of purely pairwise rhythmicity, comparing each inter
 		& Low
 		& 0.73
 		& 2.76 
-		& \qty{210}{\milli \second} \\
+		& \qty{260}{\milli \second} \\
 		
 		\hline
 		$\mathbf{t_{\theta}} = \qty{177.78}{\milli \second}$ 
-		& 0.6857 [\qtyrange{0.685}{0.692}{}]
+		& 0.6867 [\qtyrange{0.685}{0.692}{}]
 		& 2.237 [\qtyrange{2.20}{2.28}{}]
 		& \qty{178.4}{\milli \second}
 		& Medium
@@ -72,36 +72,35 @@ which allows quantification of purely pairwise rhythmicity, comparing each inter
 		& High
 		& 0.78
 		& 3.60 
-		& \qty{260}{\milli \second} \\
+		& \qty{210}{\milli \second} \\
 		\bottomrule
 	\end{tabularx}
-    \caption{\textbf{Effect of saccade rate on rhythmicity and ISI peak.} The left four columns represent the rhythmicity found in the modelled saccades, with saccade rate modulated with different values of kernel timescale $\tau$. Along with standard parameters, as described in \cref{sec:model_setup}, the kernel timescales are $\tau=\qty{2.0}{\milli \second}, \qty{2.5}{\milli \second}, \qty{3.0}{\milli \second}$. Histograms of the ISIs for these simulations are shown in \cref{fig:local_rhythmicity}\textbf{a)}. We reproduce the result that high saccade rates are correlated with high rhythmicity \cite{naher_primate_saccades}, as seen in monotonically increasing $\mathrm{RCRI}$ and $\mathrm{RI}$ with increasing saccade rate. Empirical results are given in the right four columns \cite{naher_primate_saccades}.}
+    \caption{\textbf{Effect of saccade rate on rhythmicity in model and data.} The left four columns represent the rhythmicity found in the modelled saccades, with saccade rate modulated with different values of kernel timescale $\tau$. Along with standard parameters, as described in \cref{sec:model_setup}, the kernel timescales are $\tau=\qty{0.2}{\milli \second}, \qty{0.25}{\milli \second}, \qty{0.3}{\milli \second}$. Histograms of the ISIs for these simulations are shown in \cref{fig:local_rhythmicity}\textbf{a)}. We reproduce the result that high saccade rates are correlated with high rhythmicity \cite{naher_primate_saccades}, as seen in monotonically increasing $\mathrm{RCRI}$ and $\mathrm{RI}$ with increasing saccade rate. Empirical results are given in the right four columns \cite{naher_primate_saccades}.}
 	\label{tab:theta_comparison}
 \end{table}
 
 \begin{figure}[htbp!]
 	\centering
-	\begin{subfigure}[T]{0.36\textwidth}
+	\begin{subfigure}[T]{0.38\textwidth}
 		\centering
 		\panel{a)}{figures/theta_rhythmicity/Combined_ISI_Histograms.pdf}
 		\label{fig:model_plot}
 	\end{subfigure}
 	\hfill
-	\begin{subfigure}[T]{0.3\textwidth}
+	\begin{subfigure}[T]{0.29\textwidth}
 		\centering
 		\panel{b)}{figures/theta_rhythmicity/ISI.png}
 		\label{fig:gamma_fits}
 	\end{subfigure}
 	\hfill
-	\begin{subfigure}[T]{0.3\textwidth}
+	\begin{subfigure}[T]{0.29\textwidth}
 		\centering
 		\panel{c)}{figures/theta_rhythmicity/RCRI.png}
 		\label{fig:rate-RCRI}
 	\end{subfigure}
     \vspace{-2.2em}
-	\caption{\textbf{(a)} The distribution of ISIs from the model given different underlying theta rhythms $t_{\theta} = \qty{142.22}{\milli \second}, \, \qty{177.78}{\milli \second}, \, \qty{213.33}{\milli \second}$. Full statistics and rhythmicity indices are given in \cref{tab:param_effects}. Gamma fits have shape parameters $k=6.53, 5.86, 5.13$ respectively, demonstrating that saccade rate and rhythmicity are correlated. \textbf{(b)} Empirical distribution of ISIs after trials are binned into low- medium- and high-tertiles. \textbf{(c)} Trials binned with shorter ISIs are correlated with a high rhythmicity of saccades ($\mathbf{\rho} = 0.39, P=0.001$). Such a conclusion corresponds to the kernel dynamics presented, where faster kernel dynamics will increase rhythmic transitions (see \cref{subsec:adaptive_kernel_dynamics}). \textit{\textbf{(b)} and \textbf{(c)} adapted from Figure.~5 of \textcite{naher_primate_saccades}}}
+	\caption{\textbf{a)} The distribution of ISIs from the model given different underlying theta rhythms $t_{\theta} = \qty{142.22}{\milli \second}, \, \qty{177.78}{\milli \second}, \, \qty{213.33}{\milli \second}$. Full statistics and rhythmicity indices are given in \cref{tab:theta_comparison}. Gamma fits have shape parameters $k=6.53, 5.86, 5.13$ respectively, demonstrating that saccade rate and rhythmicity are correlated. \textbf{b)} Empirical distribution of ISIs after trials are binned into low- medium- and high-tertiles. \textbf{c)} Trials binned with shorter ISIs are correlated with a high rhythmicity of saccades ($\mathbf{\rho} = 0.39, P=0.001$). Such a conclusion aligns with the presented kernel dynamics, in which faster dynamics increase rhythmic transitions (see \cref{subsec:adaptive_kernel_dynamics}). \textit{\textbf{b)} and \textbf{c)} adapted from Figure.~5 of \textcite{naher_primate_saccades}}}
 	\label{fig:local_rhythmicity}
 \end{figure}
 \subsubsection*{Interpretations of local rhythmicity and saccade rate for a model of gaze dynamics}
-
-These results support our unified framework of gaze dynamics, specifically those predictions of the kernel dynamics described in \cref{subsec:adaptive_kernel_dynamics}. We have shown good agreement between the tight gamma renewal fit of modelled ISIs and the empirical ISI statistics. We have also introduced a natural parameter $\tau$ with which to modulate the slowly varying theta-scale saccade rate, whose effects on rhythmicity and average saccade rate are shown in \cref{tab:theta_comparison}. A correlation between high saccade rate and high rhythmicity is predicted from the origin of regular dynamical-informational transitions as described in \cref{sec:dynamical-information_adaptation}, where a stronger kernel produces more rhythmic transitions, and a weaker kernel will approach an arrhythmic Poisson point distribution of ISIs, as fluctuation-driven exploration begins to dominate the search, reducing rhythmicity in saccades.
+These results support our unified framework of gaze dynamics, specifically those predictions of the kernel dynamics described in \cref{subsec:adaptive_kernel_dynamics}. We have shown good agreement between the tight-gamma renewal fit to modelled ISIs and the empirical ISI statistics. We have also introduced a parameter $\tau$ with which to modulate the slowly varying theta-scale saccade rate, whose effects on rhythmicity and average saccade rate are shown in \cref{tab:theta_comparison}. A correlation between high saccade rate and high rhythmicity is predicted from the origin of regular dynamical-informational transitions as described in \cref{sec:dynamical-information_adaptation}, where a stronger kernel produces more rhythmic transitions, and a weaker kernel will approach an arrhythmic Poisson point distribution of ISIs, as fluctuation-driven exploration begins to dominate the search, reducing rhythmicity in saccades.

@@ -1,20 +1,20 @@
 \section{Local harmonic oscillations}\label{sec:local_harmonic_oscillations}
-One predictive feature of FNS dynamics is the local oscillations in sampling within confined potentials. We can quantify such high frequency oscillations under FNS dynamics by considering the deterministic part of our FNS equations of motion in \cref{eq:fns_system}. Considering a Gaussian probability distribution of fixation positions $\pi(\textbf{x}) \propto \exp \left( - \frac{\| \textbf{x} \|^2}{2 \sigma_{\text{fix}}^2} \right)$ and thus logarithmic gradients $\nabla \ln \pi(\textbf{x}) = -\frac{\textbf{x}}{\sigma_{\text{fix}}^2}$. Using this as our saliency landscape $\pi(\textbf{x})$ without considering perturbation to the explored potential from the slowly updating kernel dynamics, our equations of motion are
+One predictive feature of FNS dynamics is the local oscillations in sampling within confined potentials. We can quantify such high-frequency oscillations under FNS dynamics by considering the deterministic part of our FNS equations of motion in \cref{eq:fns_system}. Considering a Gaussian probability distribution of fixation positions $\pi(\textbf{x}) \propto \exp \left( - \frac{\| \textbf{x} \|^2}{2 \sigma_{\text{fix}}^2} \right)$ and thus logarithmic gradients $\nabla \ln \pi(\textbf{x}) = -\frac{\textbf{x}}{\sigma_{\text{fix}}^2}$. Using this as our saliency landscape $\pi(\textbf{x})$ without considering perturbation to the explored potential from the slowly updating kernel dynamics, our equations of motion are
 \begin{equation}
 \begin{aligned}
     d\textbf{x}_t &= -\gamma c_{\alpha} \frac{\textbf{x}_t}{\sigma_{\text{fix}}^2} dt + \beta \textbf{p}_t dt + \gamma^{1/\alpha} dL_t^{\alpha}, \\
     d\textbf{p}_t &= -\beta c_{\alpha} \frac{\textbf{x}_t}{\sigma_{\text{fix}}^2} dt
 \end{aligned}
 \end{equation}
-where we ignore the stochastic noise driving this equation to only consider the coupled ODE which describes deterministic part of $\textbf{x} = \textbf{x}_t$ and $ \textbf{p} = \textbf{p}_t$, where the loss of subscript in typical when moving from an SDE to an ODE
+where we ignore the stochastic noise driving this equation, only to consider the coupled ODE which describes the deterministic part of $\textbf{x} = \textbf{x}_t$ and $ \textbf{p} = \textbf{p}_t$, where the loss of subscript is typical when moving from an SDE to an ODE
 \begin{equation}
 \begin{aligned}
     \frac{d \textbf{x}}{dt} &= -\gamma c_{\alpha} \frac{\textbf{x}}{\sigma_{\text{fix}}^2} + \beta \textbf{p}, \\
     \frac{d\textbf{p}}{dt} &= -\beta c_{\alpha} \frac{\textbf{x}}{\sigma_{\text{fix}}^2} 
 \end{aligned}
 \end{equation}
-Assuming an underdamped regime where the system is periodic, corresponding to parameter range $\beta > \gamma \sqrt{c_{\alpha}} / \sigma_{\text{fix}}$, the resonant ordinary frequency $f = 2 \pi \omega$ is given by
+Assuming an underdamped regime where the system is periodic, corresponding to parameter range $\beta > \gamma \sqrt{c_{\alpha}} / 2 \sigma_{\text{fix}}$, the resonant ordinary frequency $f = \omega / 2 \pi$ is given by
 \begin{equation}\label{eq:resonant_frequency}
     f = \frac{1}{2 \pi \sigma_{\text{fix}}} \sqrt{\beta^2 c_{\alpha} - \frac{\gamma^2 c_{\alpha}^2}{4\sigma_{\text{fix}}^2}}
 \end{equation}
-% The parameters $\beta$ and $\gamma$ drive the high-frequency dynamics observed during fixation intervals. $\beta = 1000$ was explicitly tuned to match the empirical microtremor fixation frequency at 65 Hz with a standard deviation of 3 pixels. Correspondingly, $\gamma = 1000$ was selected to be of a similar order of magnitude to $\beta$ to appropriately dampen these strong 65 Hz oscillations. The interaction of these parameters successfully replicates a prominent gamma-band peak centred around 65 Hz, matching empirical eye velocity power spectral density during stable fixations.
+% The parameters $\beta$ and $\gamma$ drive the high-frequency dynamics observed during fixation intervals. $\beta = 1000$ was explicitly tuned to match the empirical microtremor fixation frequency at 65 Hz with a standard deviation of 3 pixels. Correspondingly, $\gamma = 1000$ was selected to be of a similar order of magnitude to $\beta$ to dampen these strong 65 Hz oscillations appropriately. The interaction of these parameters successfully replicates a prominent gamma-band peak centred at 65 Hz, matching the empirical eye-velocity power spectral density during stable fixations.
